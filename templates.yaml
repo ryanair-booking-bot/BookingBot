@@ -1,4 +1,4 @@
-welcome: Welcome welcome welcome to Ryanair booking system. Where would you like to fly?
+welcome: Hi and welcome to Ryanair booking system. Where would you like to fly?
 noSuchDestination: Sorry, we don't flight to {}
 askForDeparturePlace: Where will you travel from?
 destinationAndDepartureCollected: Great, let me search for a flight from {} to {}
