@@ -1,7 +1,7 @@
 """This module does blah blah."""
+# pylint: disable=too-few-public-methods
 
-
-class Database(object):     # pylint: disable=too-few-public-methods
+class Database(object):
     "Shared connection to the database"
 
     def __init__(self, filename):
