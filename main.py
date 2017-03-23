@@ -9,7 +9,7 @@ from flask_ask import Ask
 
 app = Flask(__name__)
 ask = Ask(app, "/")
-db = Database("filename")
+db = Database()
 
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
