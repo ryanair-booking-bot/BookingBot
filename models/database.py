@@ -1,10 +1,9 @@
 """This module does blah blah."""
 # pylint: disable=too-few-public-methods
+# pylint: disable=unused-variable
 
 import os
-import datetime
 import pandas as pd
-from openpyxl import load_workbook
 
 class Database(object):
     "Shared connection to the database"
@@ -13,9 +12,8 @@ class Database(object):
         self.cities = ["Warsaw", "Manchester", "Berlin"]
 
         os.chdir('./models')
-        self.workbook = load_workbook('./FlightListIE2016.xlsx')
-        first_sheet = self.workbook.get_sheet_names()[0]
-        self.flights = self.workbook.get_sheet_by_name(first_sheet)
+        self.flights = pd.read_csv('flight-list.csv')
+        self.codes = pd.read_csv('airport-codes.csv', usecols=[9, 11]).dropna()
 
     def does_place_exist(self, destination_name):
         "Checks if place exists"
@@ -27,11 +25,20 @@ class Database(object):
         "ss"
 
         result = []
-        for row in range(2, self.flights.max_row):
-            source = self.flights.cell(row=row, column=3).value
-            destination = self.flights.cell(row=row, column=4).value
-            date = self.flights.cell(row=row, column=1).value
+        for index, row in self.flights.iterrows():
+            source = row[2]
+            destination = row[3]
+            date = row[0]
             if source == departure_station and destination == arrival_station \
                 and date == departure_date:
-                result.append([x.value for x in self.flights[row]])
+                result.append([x for x in row])
+        print result
+
+    def get_airport_codes(self, city):
+        "ss"
+
+        result = []
+        for index, row in self.codes.iterrows():
+            if row[0] == city:
+                result.append(row[1])
         return result
