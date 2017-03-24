@@ -4,16 +4,17 @@
 
 import os
 import pandas as pd
+from utils.decorators.singleton import Singleton
 
+@Singleton
 class Database(object):
     "Shared connection to the database"
 
     def __init__(self):
         self.cities = ["Warsaw", "Manchester", "Berlin"]
 
-        os.chdir('./models')
-        self.flights = pd.read_csv('flight-list.csv')
-        self.codes = pd.read_csv('airport-codes.csv', usecols=[9, 11]).dropna()
+        self.flights = pd.read_csv('./models/flight-list.csv')
+        self.codes = pd.read_csv('./models/airport-codes.csv', usecols=[9, 11]).dropna()
 
     def does_place_exist(self, destination_name):
         "Checks if place exists"

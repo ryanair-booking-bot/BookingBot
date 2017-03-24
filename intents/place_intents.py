@@ -3,12 +3,14 @@
 
 from flask import render_template
 from flask_ask import statement, question, session
+from models.database import Database
 
 DEPARTURE_CITY = "DEPARTURE_CITY"
 DESTINATION_CITY = "DESTINATION_CITY"
 
-def handle_place_intents(ask, database):
+def handle_place_intents(ask):
     "Place intents handler"
+    database = Database.Instance()
 
     @ask.intent("PlaceIntent")
     def place(name):

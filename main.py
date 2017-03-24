@@ -9,10 +9,8 @@ from flask_ask import Ask
 
 app = Flask(__name__)
 ask = Ask(app, "/")
-db = Database()
-
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 if __name__ == '__main__':
-    handle_intents(ask, db)
+    handle_intents(ask)
     app.run(debug=True)

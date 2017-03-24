@@ -4,7 +4,7 @@
 from flask import render_template
 from flask_ask import statement, question, session
 
-def handle_app_intents(ask, database):
+def handle_app_intents(ask):
     "app intents handler"
 
     @ask.launch
