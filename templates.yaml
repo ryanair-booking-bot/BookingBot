@@ -2,5 +2,6 @@ welcome: Welcome to Ryanair booking system. Where would you like to fly?
 
 #place templates
 noSuchDestination: Sorry, we don't flight to {}
+noFlightConnection: Sorry, we don't fly from {} to {}
 askForDeparturePlace: Where will you travel from?
-destinationAndDepartureCollected: Great, let me search for a flight from {} to {}
+destinationAndDepartureCollected: Great, when do you want to flight from {} to {}
