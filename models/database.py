@@ -2,11 +2,10 @@
 # pylint: disable=too-few-public-methods
 # pylint: disable=unused-variable
 
-from timeit import default_timer as timer
 import pandas as pd
-# from utils.decorators.singleton import Singleton
+from utils.decorators.singleton import Singleton
 
-# @Singleton
+@Singleton
 class Database(object):
     "Shared connection to the database"
 
