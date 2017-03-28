@@ -26,7 +26,7 @@ def handle_place_intents(ask):
     def start_searching_for_flight():
         "Finds a flight and decides if can proceed"
 
-        if database.does_connections_exist(
+        if database.do_connections_exist(
                 session.attributes[DEPARTURE_CITY],
                 session.attributes[DESTINATION_CITY]):
             return statement(

@@ -2,11 +2,11 @@
 # pylint: disable=too-few-public-methods
 # pylint: disable=unused-variable
 
-import os
+from timeit import default_timer as timer
 import pandas as pd
-from utils.decorators.singleton import Singleton
+# from utils.decorators.singleton import Singleton
 
-@Singleton
+# @Singleton
 class Database(object):
     "Shared connection to the database"
 
@@ -16,7 +16,12 @@ class Database(object):
     def does_place_exist(self, destination):
         "Checks if the city has an airport"
 
-        if self.flights.loc[lambda df: df == destination, lambda df: ['DepartureCity', 'ArrivalCity']].empty:
+        departures = self.flights.loc[lambda df: df.DepartureCity == destination,
+                                      lambda df: ['DepartureCity']]
+        arrivals = self.flights.loc[lambda df: df.ArrivalCity == destination,
+                                    lambda df: ['ArrivalCity']]
+
+        if departures.empty and arrivals.empty:
             return False
         return True
 
@@ -29,7 +34,7 @@ class Database(object):
 
         return result
 
-    def does_connections_exist(self, departure_city, arrival_city):
+    def do_connections_exist(self, departure_city, arrival_city):
         "Checks if there is any flight between two airports"
 
         connections = self.flights.loc[lambda df: df.DepartureCity == departure_city, :] \
