@@ -95,3 +95,6 @@ ENV/
 
 #Visual Studio Code settings
 .vscode
+
+#IntelliJ family settings
+.idea
