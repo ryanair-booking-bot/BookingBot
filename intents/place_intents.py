@@ -29,7 +29,7 @@ def handle_place_intents(ask):
         if database.do_connections_exist(
                 session.attributes[DEPARTURE_CITY],
                 session.attributes[DESTINATION_CITY]):
-            return statement(
+            return question(
                 render_template(
                     'destinationAndDepartureCollected').format(
                     session.attributes[DEPARTURE_CITY],
