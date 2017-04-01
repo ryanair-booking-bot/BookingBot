@@ -30,8 +30,9 @@ class Database(object):
         result = self.flights.loc[lambda df: df.DepartureCity == departure_city, :] \
                      .loc[lambda df: df.ArrivalCity == arrival_city, :]             \
                      .loc[lambda df: df.DepartureDate == date, :]
-
-        return result
+        if result.empty:
+            return None             
+        return result.values.tolist()
 
     def do_connections_exist(self, departure_city, arrival_city):
         "Checks if there is any flight between two airports"

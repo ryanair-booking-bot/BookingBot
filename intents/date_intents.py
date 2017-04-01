@@ -22,19 +22,19 @@ def handle_date_intents(ask):
 		the_date_str = str(the_date.month) + '/' + str(the_date.day) + '/' + str(the_date.year)
 		session.attributes[DEPARTURE_DATE] = the_date_str
 		departure_date_is_set = DEPARTURE_DATE in session.attributes
-	   
+	
 	   	if departure_date_is_set:
-		
+				
 			flights = (database.get_flights(			 \
-				 session.attributes[DEPARTURE_CITY],     \
-				 session.attributes[DESTINATION_CITY],	 \
-				 session.attributes[DEPARTURE_DATE])).copy()
+				session.attributes[DEPARTURE_CITY],      \
+				session.attributes[DESTINATION_CITY],	 \
+				session.attributes[DEPARTURE_DATE]))
 				 
-		if not flights.empty:
-			return statement(render_template('foundFlights').format(	\
-			session.attributes[DEPARTURE_CITY], 						\
-			session.attributes[DESTINATION_CITY],						\
-			session.attributes[DEPARTURE_DATE]))
-			
+			if flights:
+				return statement(render_template('foundFlights').format(	\
+					session.attributes[DEPARTURE_CITY], 						\
+					session.attributes[DESTINATION_CITY],						\
+					session.attributes[DEPARTURE_DATE]))
+	
 		return statement(render_template('noSuchFlightsAtDate').format(the_date))
 		
