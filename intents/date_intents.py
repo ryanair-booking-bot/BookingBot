@@ -28,13 +28,13 @@ def handle_date_intents(ask):
 			flights = (database.get_flights(			 \
 				session.attributes[DEPARTURE_CITY],      \
 				session.attributes[DESTINATION_CITY],	 \
-				session.attributes[DEPARTURE_DATE]))
-				 
+				session.attributes[DEPARTURE_DATE])) 
 			if flights:
-				return statement(render_template('foundFlights').format(	\
+				print "Flights: ", flights
+				return statement(render_template('foundFlights').format(		\
 					session.attributes[DEPARTURE_CITY], 						\
 					session.attributes[DESTINATION_CITY],						\
 					session.attributes[DEPARTURE_DATE]))
-	
-		return statement(render_template('noSuchFlightsAtDate').format(the_date))
+		
+		return statement("There is no flight at this date")
 		
