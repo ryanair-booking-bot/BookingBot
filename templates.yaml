@@ -7,5 +7,5 @@ askForDeparturePlace: Where will you travel from?
 destinationAndDepartureCollected: Great, when do you want to flight from {} to {}
 
 #date templates
-noSuchFlightAtDate: Sorry, there is no flight {}
+noSuchFlightAtDate: Sorry, there is no flight on {}
 foundFlights: There is flight from {} to {} at {}. Would you like to book it?
