@@ -18,16 +18,19 @@ def handle_date_intents(ask):
 	
 	@ask.intent("DepartureDateIntent", convert={'the_date': 'date'})
 	def departure_date(the_date):
-	   session.attributes[DEPARTURE_DATE] = str(the_date)
-	   departure_date_is_set = DEPARTURE_DATE in session.attributes
+
+		the_date_str = str(the_date.month) + '/' + str(the_date.day) + '/' + str(the_date.year)
+		session.attributes[DEPARTURE_DATE] = the_date_str
+		departure_date_is_set = DEPARTURE_DATE in session.attributes
 	   
-	   if departure_date_is_set:
-		flights = []
-		flights.extend(database.get_flights(			 \
+	   	if departure_date_is_set:
+		
+			flights = (database.get_flights(			 \
 				 session.attributes[DEPARTURE_CITY],     \
 				 session.attributes[DESTINATION_CITY],	 \
-				 session.attributes[DEPARTURE_DATE]))
-		if flights:
+				 session.attributes[DEPARTURE_DATE])).copy()
+				 
+		if not flights.empty:
 			return statement(render_template('foundFlights').format(	\
 			session.attributes[DEPARTURE_CITY], 						\
 			session.attributes[DESTINATION_CITY],						\
