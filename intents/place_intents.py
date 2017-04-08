@@ -51,7 +51,7 @@ def handle_place_intents(ask):
             if database.does_place_exist(name):
                 session.attributes[DEPARTURE_CITY] = name
                 return start_searching_for_flight()
-            return question(render_template('noSuchDeaprturePlaceChooseAnother').format(name))
+            return question(render_template('noSuchDeaprturePlace_ChooseAnother').format(name))
 
         else:
             # checks destination
@@ -59,7 +59,7 @@ def handle_place_intents(ask):
                 session.attributes[DESTINATION_CITY] = name
                 return question(render_template("askForDeparturePlace"))
             else:
-                return statement(render_template('noSuchDestination').format(name))
+                return question(render_template('noSuchDestinationPlace_ChooseAnother').format(name))
 
     @ask.intent("DestinationPlaceIntent")
     def detination_place(name):
