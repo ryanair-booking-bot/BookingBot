@@ -33,7 +33,8 @@ def handle_place_intents(ask):
                 render_template(
                     'destinationAndDepartureCollected').format(
                     session.attributes[DEPARTURE_CITY],
-                    session.attributes[DESTINATION_CITY]))
+                    session.attributes[DESTINATION_CITY])).reprompt(
+                render_template('didntUnderstandDate'))
         else:
             return statement(
                 render_template('noFlightConnection').format(

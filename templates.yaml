@@ -9,5 +9,10 @@ askForDeparturePlace: Where will you travel from?
 destinationAndDepartureCollected: Great, when do you want to flight from {} to {}
 
 #date templates
-noSuchFlightAtDate: Sorry, there is no flight on {}
-foundFlights: There is flight from {} to {} at {}. Would you like to book it?
+didntUnderstandDate: Sorry, didn't understand the date. Could you repeat it?'
+noSuchFlightAtDate: <speak> Sorry, there is no flight on {} </speak>
+foundFlight: <speak> There is flight from {} to {} on {} at <say-as interpret-as="time">{}</say-as>. Would you like to book it? </speak>
+
+foundFlightsBeginning:  <speak> There are multiply flights from {} to {} on {}. <break time="1s"/> Flights 
+foundFlightsMiddle:  Departure <say-as interpret-as="time">{}</say-as>, arrival <say-as interpret-as="time">{}</say-as> <break time="1s"/> 
+foundFlightsEnd:  Would you like to book one of these? </speak> 
