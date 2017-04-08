@@ -47,12 +47,14 @@ def handle_place_intents(ask):
         destination_is_set = DESTINATION_CITY in session.attributes
 
         if destination_is_set:
+            # checks departure
             if database.does_place_exist(name):
                 session.attributes[DEPARTURE_CITY] = name
                 return start_searching_for_flight()
-            return statement(render_template('noSuchDestination').format(name))
+            return question(render_template('noSuchDeaprturePlaceChooseAnother').format(name))
 
         else:
+            # checks destination
             if database.does_place_exist(name):
                 session.attributes[DESTINATION_CITY] = name
                 return question(render_template("askForDeparturePlace"))
