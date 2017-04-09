@@ -15,4 +15,6 @@ DepartureDateIntent Find me flight {the_date}
 
 
 HowManySeatsToBook {number}
+YesIntent {boolvalue}
+NoIntent {boolvalue}
 

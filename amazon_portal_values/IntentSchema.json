@@ -44,6 +44,12 @@
         }
       ],
       "intent": "HowManySeatsToBook"
+    },
+    {
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
     }
   ]
 }

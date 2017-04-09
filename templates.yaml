@@ -48,6 +48,19 @@ askForSeatsAmount: |
     How many seats do you want to book?
 askToRepeatAmount: |
     Sorry, I didn't get it. How many seats do you want to book?
-
+askForSeat: |
+    Do you want to book choose a seat for ten euros?
+askToRepeatSeat: |
+    Sorry, I didn't get it. Do you want to choose a seat for ten euros?
 askForInsurance: |
     Do you want to book insurance?
+askToRepeatInsurance: |
+    Sorry, I didn't get it. Do you want to book insurance?
+saySummaryAndConfirm: |
+    Now I will tell you the summary of your booking
+bookingDone: |
+    Congratulations, you have just booked the flight. Thank you and have a nic flight
+bookingCancelled: |
+    You booking is cancelled. Goodbye
+askForLastConfirmation: |
+    Sorry, I didn't get it. Do you want to book insurance?
