@@ -43,7 +43,7 @@ noSuchFlightAtDate: |
   </speak>
 
 
-  #more_info templates
+#more_info templates
 askForSeatsAmount: |
     How many seats do you want to book?
 askToRepeatAmount: |
@@ -51,13 +51,13 @@ askToRepeatAmount: |
 askForSeat: |
     Do you want to book choose a seat for ten euros?
 askToRepeatSeat: |
-    Sorry, I didn't get it. Do you want to choose a seat for ten euros?
+    Sorry, I didn't get it. Do you want to choose a seat for ten euros for each passenger?
 askForInsurance: |
     Do you want to book insurance?
 askToRepeatInsurance: |
-    Sorry, I didn't get it. Do you want to book insurance?
+    Sorry, I didn't get it. Do you want to book insurance for fifteen euros for each passenger?
 saySummaryAndConfirm: |
-    Now I will tell you the summary of your booking
+    Now I will tell you the summary of your booking.
 bookingDone: |
     Congratulations, you have just booked the flight. Thank you and have a nic flight
 bookingCancelled: |

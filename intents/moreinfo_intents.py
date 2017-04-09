@@ -5,6 +5,7 @@ from flask import render_template
 from flask_ask import statement, question, session
 from models.database import Database
 from utils.constants import constants
+import random
 
 
 
@@ -60,3 +61,21 @@ def response_booking_confirmation(customer_confirms):
         return statement(render_template('bookingCancelled'))
 
 
+def calculate_price():
+    "Moreinfo intents handler"
+    full_price = 0
+    passenger_number = session.attributes[constants.PASSENGERS_NO]
+
+    if session.attributes[constants.SEAT_RESERVATION]:
+        full_price += constants.SEAT_PRICE * passenger_number
+
+    if session.attributes[constants.INSURANCE]:
+        full_price += constants.INSURANCE_PRICE * passenger_number
+
+    price_of_flight = random.randint(constants.FLIGHT_MIN_PRICE, \
+                                     constants.FLIGHT_MAX_PRICE)
+
+    full_price += price_of_flight
+    return full_price
+
+    
