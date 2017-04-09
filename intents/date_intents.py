@@ -5,10 +5,8 @@ from flask import render_template
 from flask_ask import statement, question, session
 from models.database import Database
 from datetime import date
+from utils.constants import constants
 
-DEPARTURE_DATE = "DEPARTURE_DATE"
-DEPARTURE_CITY = "DEPARTURE_CITY"
-DESTINATION_CITY = "DESTINATION_CITY"
 
 #TODO: Do you need a return ticket?
 #TODO: Choosing flight from the list
@@ -33,16 +31,16 @@ def handle_date_intents(ask):
 			if len(flights_at_date) == 1:
 				"There is only one flight at date"
 				found_flights = render_template('foundFlight').format(		\
-									session.attributes[DEPARTURE_CITY],		\
-									session.attributes[DESTINATION_CITY], 	\
-									session.attributes[DEPARTURE_DATE],		\
+									session.attributes[constants.DEPARTURE_CITY],		\
+									session.attributes[constants.DESTINATION_CITY], 	\
+									session.attributes[constants.DEPARTURE_DATE],		\
 									flights_at_date[0][5].split()[1])	
 			else:
 				"There are multiple flights at date"
 				found_flights = render_template('foundFlightsBeginning').format(		\
-									session.attributes[DEPARTURE_CITY], 				\
-									session.attributes[DESTINATION_CITY], 				\
-									session.attributes[DEPARTURE_DATE]) + " "
+									session.attributes[constants.DEPARTURE_CITY], 				\
+									session.attributes[constants.DESTINATION_CITY], 				\
+									session.attributes[constants.DEPARTURE_DATE]) + " "
 				"List hours of flights"
 				for flight in flights_at_date:
 				# TODO: check if the arrival is the next day, inform about it 
@@ -58,14 +56,14 @@ def handle_date_intents(ask):
 
 	@ask.intent("DepartureDateIntent", convert={'the_date': 'date'})
 	def departure_date(the_date):
-		session.attributes[DEPARTURE_DATE] = str(the_date)
-		departure_date_is_set = DEPARTURE_DATE in session.attributes
+		session.attributes[constants.DEPARTURE_DATE] = str(the_date)
+		departure_date_is_set = constants.DEPARTURE_DATE in session.attributes
 	
 	   	if departure_date_is_set:
 
 			flights_at_date = (database.get_flights(					 \
-						session.attributes[DEPARTURE_CITY],     		 \
-						session.attributes[DESTINATION_CITY],	 		 \
+						session.attributes[constants.DEPARTURE_CITY],     		 \
+						session.attributes[constants.DESTINATION_CITY],	 		 \
 						convert_date_to_database_format(the_date)))		
 			
 			if flights_at_date:
@@ -80,9 +78,9 @@ def handle_date_intents(ask):
 
 
 				return question(render_template('noSuchFlightAtDate').format(	\
-							session.attributes[DEPARTURE_CITY],     		 	\
-							session.attributes[DESTINATION_CITY],				\
-							session.attributes[DEPARTURE_DATE]))
+							session.attributes[constants.DEPARTURE_CITY],     		 	\
+							session.attributes[constants.DESTINATION_CITY],				\
+							session.attributes[constants.DEPARTURE_DATE]))
 		else:
 			pass
 

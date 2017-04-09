@@ -41,3 +41,13 @@ noSuchFlightAtDate: |
     Sorry, there is no flight from {} to {} on {}. 
     Look for flights day before and after?
   </speak>
+
+
+  #more_info templates
+askForSeatsAmount: |
+    How many seats do you want to book?
+askToRepeatAmount: |
+    Sorry, I didn't get it. How many seats do you want to book?
+
+askForInsurance: |
+    Do you want to book insurance?

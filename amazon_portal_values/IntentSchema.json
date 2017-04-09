@@ -1,0 +1,49 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "name",
+          "type": "AMAZON.EUROPE_CITY"
+        }
+      ],
+      "intent": "DestinationPlaceIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "name",
+          "type": "AMAZON.EUROPE_CITY"
+        }
+      ],
+      "intent": "DeparturePlaceIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "name",
+          "type": "AMAZON.EUROPE_CITY"
+        }
+      ],
+      "intent": "PlaceIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "the_date",
+          "type": "AMAZON.DATE"
+        }
+      ],
+      "intent": "DepartureDateIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "number",
+          "type": "AMAZON.NUMBER"
+        }
+      ],
+      "intent": "HowManySeatsToBook"
+    }
+  ]
+}

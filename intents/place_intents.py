@@ -4,9 +4,8 @@
 from flask import render_template
 from flask_ask import statement, question, session
 from models.database import Database
+from utils.constants import constants
 
-DEPARTURE_CITY = "DEPARTURE_CITY"
-DESTINATION_CITY = "DESTINATION_CITY"
 
 
 # database = Database.Instance()
@@ -27,37 +26,37 @@ def handle_place_intents(ask):
         "Finds a flight and decides if can proceed"
 
         if database.do_connections_exist(
-                session.attributes[DEPARTURE_CITY],
-                session.attributes[DESTINATION_CITY]):
+                session.attributes[constants.DEPARTURE_CITY],
+                session.attributes[constants.DESTINATION_CITY]):
             return question(
                 render_template(
                     'destinationAndDepartureCollected').format(
-                    session.attributes[DEPARTURE_CITY],
-                    session.attributes[DESTINATION_CITY])).reprompt(
+                    session.attributes[constants.DEPARTURE_CITY],
+                    session.attributes[constants.DESTINATION_CITY])).reprompt(
                 render_template('didntUnderstandDate'))
         else:
             return statement(
                 render_template('noFlightConnection').format(
-                    session.attributes[DEPARTURE_CITY],
-                    session.attributes[DESTINATION_CITY]))
+                    session.attributes[constants.DEPARTURE_CITY],
+                    session.attributes[constants.DESTINATION_CITY]))
 
     @ask.intent("PlaceIntent")
     def place(name):
         "If user says just the name of the city. Eg.'London'. " \
         "Then we need to check what info he already passed"
-        destination_is_set = DESTINATION_CITY in session.attributes
+        destination_is_set = constants.DESTINATION_CITY in session.attributes
 
         if destination_is_set:
             # checks departure
             if database.does_place_exist(name):
-                session.attributes[DEPARTURE_CITY] = name
+                session.attributes[constants.DEPARTURE_CITY] = name
                 return start_searching_for_flight()
             return question(render_template('noSuchDeaprturePlace_ChooseAnother').format(name))
 
         else:
             # checks destination
             if database.does_place_exist(name):
-                session.attributes[DESTINATION_CITY] = name
+                session.attributes[constants.DESTINATION_CITY] = name
                 return question(render_template("askForDeparturePlace"))
             else:
                 return question(render_template('noSuchDestinationPlace_ChooseAnother').format(name))
@@ -68,7 +67,7 @@ def handle_place_intents(ask):
         " So we need to ask for the departure city"
 
         if database.does_place_exist(name):
-            session.attributes[DESTINATION_CITY] = name
+            session.attributes[constants.DESTINATION_CITY] = name
             msg = render_template("askForDeparturePlace")
             return question(msg)
 
@@ -81,7 +80,7 @@ def handle_place_intents(ask):
         "Receives departure place       Eg. 'from London' "
 
         if database.does_place_exist(name):
-            session.attributes[DEPARTURE_CITY] = name
+            session.attributes[constants.DEPARTURE_CITY] = name
             return start_searching_for_flight()
         else:
             msg = render_template('noSuchDestination').format(name)
