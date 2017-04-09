@@ -1,18 +1,43 @@
-welcome: Welcome to Ryanair booking system. Where would you like to fly?
+welcome: |
+    Welcome to Ryanair booking system. Where would you like to fly?
 
 #place templates
-noSuchDestination: Sorry, we don't flight to {}
-noSuchDeaprturePlace_ChooseAnother: Sorry, we don't operate in {}. Please choose another departure place'
-noSuchDestinationPlace_ChooseAnother: Sorry, we don't operate in {}. Please choose another destination'
-noFlightConnection: Sorry, we don't fly from {} to {}
-askForDeparturePlace: Where will you travel from?
-destinationAndDepartureCollected: Great, when do you want to flight from {} to {}
+noSuchDestination: |
+    Sorry, we don't flight to {}
+noSuchDeaprturePlace_ChooseAnother: |
+    Sorry, we don't operate in {}. Please choose another departure place'
+noSuchDestinationPlace_ChooseAnother: |
+    Sorry, we don't operate in {}. Please choose another destination'
+noFlightConnection: |
+    Sorry, we don't fly from {} to {}
+askForDeparturePlace: |
+    Where will you travel from?
+destinationAndDepartureCollected: |
+    Great, when do you want to flight from {} to {}
 
 #date templates
-didntUnderstandDate: Sorry, didn't understand the date. Could you repeat it?'
-noSuchFlightAtDate: <speak> Sorry, there is no flight on {} </speak>
-foundFlight: <speak> There is flight from {} to {} on {} at <say-as interpret-as="time">{}</say-as>. Would you like to book it? </speak>
+didntUnderstandDate: |
+    Sorry, didn't understand the date. Could you repeat it?'
+foundFlight: |
+  <speak> 
+    There is flight from {} to {} on {} at 
+    <say-as interpret-as="time">{}</say-as>. 
+    Would you like to book it? 
+  </speak>
 
-foundFlightsBeginning:  <speak> There are multiply flights from {} to {} on {}. <break time="1s"/> Flights 
-foundFlightsMiddle:  Departure <say-as interpret-as="time">{}</say-as>, arrival <say-as interpret-as="time">{}</say-as> <break time="1s"/> 
-foundFlightsEnd:  Would you like to book one of these? </speak> 
+foundFlightsBeginning: |
+  <speak> 
+    There are multiple flights from {} to {} on {}. 
+    <break time="1s"/> Flights 
+foundFlightsMiddle: |
+    Departure <say-as interpret-as="time">{}</say-as>. 
+    Arrival <say-as interpret-as="time">{}</say-as> 
+    <break time="1s"/> 
+foundFlightsEnd: |
+    Would you like to book one of these? </speak> 
+
+noSuchFlightAtDate: | 
+  <speak> 
+    Sorry, there is no flight from {} to {} on {}. 
+    Look for flights day before and after?
+  </speak>

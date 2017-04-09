@@ -63,7 +63,7 @@ def handle_place_intents(ask):
                 return question(render_template('noSuchDestinationPlace_ChooseAnother').format(name))
 
     @ask.intent("DestinationPlaceIntent")
-    def detination_place(name):
+    def destination_place(name):
         "Receives destination place. Eg. 'I want to go to London' or 'to London'." \
         " So we need to ask for the departure city"
 
