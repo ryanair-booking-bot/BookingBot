@@ -20,8 +20,9 @@ didntUnderstandDate: |
     Sorry, didn't understand the date. Could you repeat it?'
 foundFlight: |
   <speak> 
-    There is flight from {} to {} on {} at 
-    <say-as interpret-as="time">{}</say-as>. 
+    There is flight from {} to {} on {}. 
+    <break time="1s"/>
+    Departure at {}, arrival at {}. 
     Would you like to book it? 
   </speak>
 
@@ -30,8 +31,8 @@ foundFlightsBeginning: |
     There are multiple flights from {} to {} on {}. 
     <break time="1s"/> Flights 
 foundFlightsMiddle: |
-    Departure <say-as interpret-as="time">{}</say-as>. 
-    Arrival <say-as interpret-as="time">{}</say-as> 
+    Departure at {}. 
+    Arrival at {} 
     <break time="1s"/> 
 foundFlightsEnd: |
     Would you like to book one of these? </speak> 
