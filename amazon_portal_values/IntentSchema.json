@@ -36,6 +36,15 @@
       ],
       "intent": "DepartureDateIntent"
     },
+     {
+      "slots": [
+        {
+          "name": "departure_date",
+          "type": "AMAZON.DATE"
+        }
+      ],
+      "intent": "ChooseFlightIntent"
+    },
     {
       "slots": [
         {

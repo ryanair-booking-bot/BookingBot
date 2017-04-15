@@ -7,9 +7,6 @@ from models.database import Database
 from utils.constants import constants
 import random
 
-
-
-
 def handle_moreinfo_intents(ask):
     "Moreinfo intents handler"
 
@@ -22,7 +19,6 @@ def handle_moreinfo_intents(ask):
 
         session.attributes[constants.PASSENGERS_NO] = number
         return question(render_template('askForSeat'))
-
 
 def response_seat_reservation(should_reserve_seats):
     "Moreinfo intents handler"

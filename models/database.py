@@ -4,7 +4,6 @@
 
 import pandas as pd
 from utils.decorators.singleton import Singleton
-
 @Singleton
 class Database(object):
     "Shared connection to the database"

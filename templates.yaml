@@ -13,7 +13,7 @@ noFlightConnection: |
 askForDeparturePlace: |
     Where will you travel from?
 destinationAndDepartureCollected: |
-    Great, when do you want to flight from {} to {}
+    Great, when do you want to flight from {} to {} ?
 
 #date templates
 didntUnderstandDate: |
@@ -23,6 +23,7 @@ foundFlight: |
     There is flight from {} to {} on {}. 
     <break time="1s"/>
     Departure at {}, arrival at {}. 
+    <break time="1s"/>
     Would you like to book it? 
   </speak>
 
@@ -37,12 +38,26 @@ foundFlightsMiddle: |
 foundFlightsEnd: |
     Would you like to book one of these? </speak> 
 
-noSuchFlightAtDate: | 
+noSuchFlightAtDateButAnother: | # in progress
   <speak> 
-    Sorry, there is no flight from {} to {} on {}. 
-    Look for flights day before and after?
+    Sorry, there is no flight from {} to {} on {}, 
+    but i found flights {} this date
+    <break time="1s"/> 
+    Would you like me to list them? 
   </speak>
 
+noSuchFlightAtDateNoAnother: | # in progress
+  <speak> 
+    Sorry, there is no flight from {} to {} on {}. 
+    I also didn't found prefered flight day before and after.
+    <break time="1s"/> 
+    Would you like to look for flights on another date?
+  </speak>
+
+askToRepeatTime: |
+    There is no flight at {}. Please repeat departure time.
+flightTimeChosen: |
+    Flight on {} at {}. Are you sure?
 
 #more_info templates
 askForSeatsAmount: |
