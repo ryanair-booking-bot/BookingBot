@@ -18,6 +18,8 @@ destinationAndDepartureCollected: |
 #date templates
 didntUnderstandDate: |
     Sorry, didn't understand the date. Could you repeat it?'
+precizeDepartureTime: |
+    There are {} flights on {}. I will list three flights after chosen hour, after which hour?   
 foundFlight: |
   <speak> 
     There is flight from {} to {} on {}. 
@@ -29,8 +31,9 @@ foundFlight: |
 
 foundFlightsBeginning: |
   <speak> 
-    There are multiple flights from {} to {} on {}. 
-    <break time="1s"/> Flights 
+    There are {} flights from {} to {} on {}. 
+    <break time="1s"/> 
+
 foundFlightsMiddle: |
     Departure at {}. 
     Arrival at {} 
