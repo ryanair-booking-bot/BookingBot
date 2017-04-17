@@ -75,7 +75,7 @@ askToRepeatInsurance: |
 saySummaryAndConfirm: |
     Now I will tell you the summary of your booking.
 bookingDone: |
-    Congratulations, you have just booked the flight. Thank you and have a nic flight
+    Congratulations, you have just booked the flight. Thank you and have a nice flight
 bookingCancelled: |
     You booking is cancelled. Goodbye
 askForLastConfirmation: |

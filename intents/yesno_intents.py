@@ -7,6 +7,8 @@ from utils.constants import constants
 from intents import moreinfo_intents
 from intents import date_intents
 
+#TODO: after setting DEPARTURE_TIME its jumps over the 'askForSeatsAmount' to 'askForInsurance'. Why?
+
 def forward_yes_no(value):
     "Forwards bool value"
 

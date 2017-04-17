@@ -17,6 +17,7 @@ import time as _time
 # but we've got four options - there are flights day before and/or after or there are no flights at this days too
 # noSuchFlight... templates
 
+
 def handle_date_intents(ask):
 	"Date intents handler"
 	result = "Handling date intent"
@@ -36,15 +37,15 @@ def handle_date_intents(ask):
 		return flights_at_date
 		
 
-	def list_flights(flights_at_date):
-		"List flights with departure and arrival time"
+	def list_flights(flights_at_date, above_hour = None): # above_hour jeszcze nie dziala
+		"List flights with departure and arrival time, if above_hour is set it list 5 flights above it"
 		
 		if flights_at_date:
-			print "Flights1", flights_at_date
+			print "Flights1", flights_at_date 		#tests
 			"Time formating"
 			departure_time = _time.strftime('%I:%M %p', _time.strptime(flights_at_date[0][5].split()[1], '%H:%M'))
 			arrival_time = _time.strftime('%I:%M %p', _time.strptime(flights_at_date[0][6].split()[1], '%H:%M'))
-
+	
 			if len(flights_at_date) == 1:
 				"There is only one flight at date"
 				found_flights = render_template('foundFlight').format(					\
@@ -52,6 +53,7 @@ def handle_date_intents(ask):
 									session.attributes[constants.DESTINATION_CITY], 	\
 									session.attributes[constants.DEPARTURE_DATE],		\
 									departure_time, arrival_time)	
+
 			else:
 				"There are multiple flights at date"
 				found_flights = render_template('foundFlightsBeginning').format(				\
@@ -65,14 +67,24 @@ def handle_date_intents(ask):
 					"Time formating - Alexa understands time in hms12 format"
 					departure_time = _time.strftime('%I:%M %p', _time.strptime(flight[5].split()[1], '%H:%M'))
 					arrival_time = _time.strftime('%I:%M %p', _time.strptime(flight[6].split()[1], '%H:%M'))
-
-					found_flights += render_template('foundFlightsMiddle').format(		\
-									departure_time, arrival_time) + " "
+					
+					if above_hour: # to jeszcze nic nie robi :)
+						d_time_tmp = _time.strptime(flight[5].split()[1], '%H:%M')
+						above_hour = _time.mktime(above_hour.timetuple())
+						print "d_time: ", d_time_tmp
+						print "above_hour: ", above_hour
+						if above_hour > d_time_tmp:
+							found_flights += render_template('foundFlightsMiddle').format(		\
+										departure_time, arrival_time) + " "
+					else:
+						found_flights += render_template('foundFlightsMiddle').format(		\
+											departure_time, arrival_time) + " "
 						
 				found_flights += render_template('foundFlightsEnd')
 					
 			return question(found_flights) 
 		return None
+	
 
 
 	@ask.intent("DepartureDateIntent", convert={'the_date': 'date'})
@@ -87,7 +99,10 @@ def handle_date_intents(ask):
 		
 			if flights_at_date:
 				"There is one or more flights at date"
+				#if len(flights_at_date) <= 5:
 				return list_flights(flights_at_date)
+				#else:
+				#	retu
 			else:
 				"There is no flight at date. Suggest flights near the date"
 			
@@ -128,18 +143,18 @@ def handle_date_intents(ask):
 							str(the_date)))
 	
 	@ask.intent("ChooseFlightIntent", convert={'departure_time': 'time'})
-	def choose_flight(departure_time):
+	def choose_time(departure_time):
 
 		departure_date_is_set = constants.DEPARTURE_DATE in session.attributes
-		departure_time_conv = departure_time.strftime("%H:%M")
+		departure_time_conv = departure_time.strftime("%H:%M").lstrip('0')
 
 		if departure_date_is_set:
 			"Checks if flight at given departure_time exists"
-			print "Flights2: ", flights_at_date
+			print "Flights2: ", flights_at_date					#test
 			for flight in flights_at_date:
-				print "Departure time: ", departure_time_conv
-				print "dt2 ", flight[5].split()[1]
-				
+				print "Departure time: ", departure_time_conv	#test
+				print "dt2 ", flight[5].split()[1]				#test
+
 				if departure_time_conv == flight[5].split()[1]:
 					session.attributes[constants.DEPARTURE_TIME] = departure_time_conv
 			
