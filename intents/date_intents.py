@@ -112,6 +112,7 @@ def handle_date_intents(ask):
 		
 		
 def confirm_return_ticket(should_book_return_ticket):
+	"'Do you need a return ticket?'"
 	session.attributes[constants.RETURN_TICKET] = should_book_return_ticket
 		
 	if should_book_return_ticket is None:
