@@ -7,8 +7,6 @@ from utils.constants import constants
 from intents import moreinfo_intents
 from intents import date_intents
 
-#TODO: #CHECK after setting DEPARTURE_TIME its jumps over the 'askForSeatsAmount' to 'askForInsurance'. Why?
-
 def forward_yes_no(value):
     "Forwards bool value"
 
@@ -22,8 +20,14 @@ def forward_yes_no(value):
     elif constants.PASSENGERS_NO in session.attributes:
         return moreinfo_intents.response_seat_reservation(value)
     
-    elif constants.DEPARTURE_TIME in session.attributes:
+    elif constants.RETURN_TIME in session.attributes:
         return question(render_template('askForSeatsAmount'))
+    
+    elif constants.RETURN_TICKET in session.attributes:
+        return question(render_template('returnTicket'))
+
+    elif constants.DEPARTURE_TIME in session.attributes:
+        return date_intents.confirm_return_ticket(value)
 
     
     #TODO: #CHECK if there is no flight, DEPARTURE_DATE is set to None, should ask again for another date

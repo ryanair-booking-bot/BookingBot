@@ -53,13 +53,14 @@ noSuchFlightAtDateNoAnother: | # in progress
     <break time="1s"/> 
     Would you like to look for flights on another date?
   </speak>
-
+askForReturnTicket: |
+    Do you need a return ticket?
 returnTicket: |
-    Do you need return ticket?
+    Great, when would you like to go back?
     
 #time templates
 precizeDepartureTime: |
-    There are {} flights on {}. Could you precize the time? 
+    There are {} flights on {}. Could you precize the time?  # TODO: starting from {} to
 askToPrecizeAgain: |
     Sorry i didn't get it. Could you precize time of departure?
     Your options are before, after or between hours

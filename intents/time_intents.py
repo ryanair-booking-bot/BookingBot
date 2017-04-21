@@ -89,28 +89,43 @@ def handle_time_intents(ask):
         " doesn't match ask to repeat it"
 
         departure_date_is_set = constants.DEPARTURE_DATE in session.attributes
+        return_date_is_set = constants.RETURN_DATE in session.attributes
+        
         departure_time_is_set = constants.DEPARTURE_TIME in session.attributes
+        return_time_is_set = constants.RETURN_TIME in session.attributes
         shorten_flights_list = constants.SHORTEN_FLIGHTS_LIST in session.attributes
        
-        if departure_date_is_set:
-            if shorten_flights_list is not None:
-                "Checks if flight at given hour exist, if so ask for confirmation"
-                for flight in database.flights_at_date:
+        
+        if shorten_flights_list is not None:
+            "Checks if flight at given hour exist, if so ask for confirmation"
+            for flight in database.flights_at_date:
                
-                    flight_departure_time = datetime.strptime(flight[5].split()[1], '%H:%M').time()
+                flight_departure_time = datetime.strptime(flight[5].split()[1], '%H:%M').time()
 
-                    if departure_time == flight_departure_time:
+                if departure_time == flight_departure_time:
+                    if return_date_is_set:
+                        session.attributes[constants.RETURN_TIME] = str(departure_time)
+                    elif departure_date_is_set:
                         session.attributes[constants.DEPARTURE_TIME] = str(departure_time)
-
+            
+            if return_date_is_set:
+                return_time_is_set = constants.RETURN_TIME in session.attributes
+            elif departure_date_is_set:
                 departure_time_is_set = constants.DEPARTURE_TIME in session.attributes
             
-            if departure_time_is_set:
-                "Confirmation of date and time"
-                return question(render_template('flightTimeChosen').format(         \
+        if departure_time_is_set:
+            "Confirmation of date and time"
+            return question(render_template('flightTimeChosen').format(             \
                                 session.attributes[constants.DEPARTURE_DATE],       \
                                 session.attributes[constants.DEPARTURE_TIME]))      \
                                 .reprompt(render_template('flightTimeChosen'))
-            else :
-                "No flight at given time, ask to choose valid time"
-                return question(render_template('askToRepeatTime').format(str(departure_time))) \
+        elif return_time_is_set:
+            "Confirmation of date and time - return ticket"
+            return question(render_template('flightTimeChosen').format(             \
+                                session.attributes[constants.RETURN_DATE],          \
+                                session.attributes[constants.RETURN_TIME]))         \
+                                .reprompt(render_template('flightTimeChosen'))
+        else :
+            "No flight at given time, ask to choose valid time"
+            return question(render_template('askToRepeatTime').format(str(departure_time))) \
                 .reprompt(render_template('didntUnderstandTime'))

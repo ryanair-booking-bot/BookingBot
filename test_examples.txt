@@ -5,9 +5,13 @@
     - (from) Dublin
     - january first two thousand seventeen / today / tomorrow
     - at eleven o five
-    - yes 
-    - no 
-    - yes
+    - yes 						// ...are you sure?
+    - yes						// ...need a return ticket?
+    - next monday					// ...when you want to fly?
+    - before four pm					// precize time
+    - two						// seats
+    - no 				
+    - yes						// insurance
 
 2/  - Manchester
     - Dublin
@@ -28,3 +32,10 @@
     - ...
 
 # Examples working good on Echosim 
+
+
+# Not working - need to be fixed
+
+- between 12:00 and 15:00 (text mode)
+
+- at nineteen fifty 

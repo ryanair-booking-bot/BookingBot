@@ -14,6 +14,8 @@ import time as _time
 #TODO: AlternativeDateIntent - there is no flight at date, 
 # but we've got four options - there are flights day before and/or after or there are no flights at this days too
 # noSuchFlightAtDate... templates
+#TODO: checking if date is available (don't book historic flights), 
+#TODO: checking if return ticket isn't earlier than first flight
 
 def handle_date_intents(ask):
 	"Date intents handler"
@@ -21,19 +23,25 @@ def handle_date_intents(ask):
 	print result
 	database = Database.Instance()
 	
-	
-
 	def convert_date_to_database_format(the_date):
 		"From YYYY-MM-DD (datetime.date) to string M/D/YYYY (month and day can be 1 or 2 digits)"
 		return (str(the_date.month) + '/' + str(the_date.day) + '/' + str(the_date.year))
 
 
-	def find_flights_at_date(the_date):
+	def find_flights_at_date(the_date, return_ticket=0):
+		if not return_ticket:
+			"Looking for flights at the_date"
+			departure_city = session.attributes[constants.DEPARTURE_CITY]
+			destination_city = session.attributes[constants.DESTINATION_CITY]
+		else:
+			"Looking for return ticket - cities from session are switched"
+			departure_city = session.attributes[constants.DESTINATION_CITY]
+			destination_city = session.attributes[constants.DEPARTURE_CITY]
 
-		database.flights_at_date = (database.get_flights(								 \
-								session.attributes[constants.DEPARTURE_CITY],     		 \
-								session.attributes[constants.DESTINATION_CITY],	 		 \
+		database.flights_at_date = (database.get_flights(						\
+								departure_city, destination_city,	 		 	\
 								convert_date_to_database_format(the_date)))	
+		
 		print "flights 1: ", database.flights_at_date
 		return database.flights_at_date
 		
@@ -75,28 +83,41 @@ def handle_date_intents(ask):
 
 	@ask.intent("DepartureDateIntent", convert={'the_date': 'date'})
 	def departure_date(the_date):
-		"Answer to 'Great, when do you want to flight from {} to {} ?' "
-		session.attributes[constants.DEPARTURE_DATE] = str(the_date)
-		departure_date_is_set = constants.DEPARTURE_DATE in session.attributes
-	
-	   	if departure_date_is_set:
-			database.flights_at_date = find_flights_at_date(the_date)
-		
-			if database.flights_at_date:
-				"There is one or more flights at date. If five or less list all, otherwise ask to precize hour"
-				if len(database.flights_at_date) <= constants.LISTED_FLIGHTS_NUMBER:
-					return list_flights(database.flights_at_date)
-				else:
-					session.attributes[constants.SHORTEN_FLIGHTS_LIST] = True
+		"Choosing departure date or return ticket date"
 
-					return question(render_template('precizeDepartureTime').format(			\
+		if constants.RETURN_TICKET in session.attributes:
+			"Return ticket date setting"
+			session.attributes[constants.RETURN_DATE] = str(the_date)
+			database.flights_at_date = find_flights_at_date(the_date, True)
+
+		elif not (constants.DEPARTURE_DATE in session.attributes):
+			"Departure date setting" 
+			session.attributes[constants.DEPARTURE_DATE] = str(the_date)
+			database.flights_at_date = find_flights_at_date(the_date)
+		 
+		if database.flights_at_date:
+			"There is one or more flights at date. If five or less list all, otherwise ask to precize hour"
+			if len(database.flights_at_date) <= constants.LISTED_FLIGHTS_NUMBER:
+				return list_flights(database.flights_at_date)
+			else:
+				session.attributes[constants.SHORTEN_FLIGHTS_LIST] = True
+
+				return question(render_template('precizeDepartureTime').format(			\
 								len(database.flights_at_date),								\
 								session.attributes[constants.DEPARTURE_DATE]))				\
 								.reprompt(render_template('askToPrecizeAgain'))
-			else:
-				"There is no flight at date. Suggest flights near the date, if exist"
-				return alternative_date_check(the_date)
-				
+		else:
+			"There is no flight at date. Suggest flights near the date, if exist"
+			return alternative_date_check(the_date)
+		
+		
+def confirm_return_ticket(should_book_return_ticket):
+	session.attributes[constants.RETURN_TICKET] = should_book_return_ticket
+		
+	if should_book_return_ticket is None:
+		return question(render_template('askForSeatsAmount'))
+	else:
+		return question(render_template('askForReturnTicket'))
 
 	
 def list_flights(_flights): 
@@ -119,7 +140,7 @@ def list_flights(_flights):
 
 		else:
 			"There are multiple flights at date"
-			found_flights = render_template('foundFlightsBeginning').format(				\
+			found_flights = render_template('foundFlightsBeginning').format(					\
 									len(_flights),												\
 									session.attributes[constants.DEPARTURE_CITY], 				\
 									session.attributes[constants.DESTINATION_CITY], 			\

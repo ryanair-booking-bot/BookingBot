@@ -57,9 +57,9 @@
         {
       "slots": [
         {
-          "name": "the_time1",
+          "name": "the_time_one",
           "type": "AMAZON.TIME",
-          "name": "the_time1",
+          "name": "the_time_two",
           "type": "AMAZON.TIME"
         }
       ],
