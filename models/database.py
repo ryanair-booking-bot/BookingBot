@@ -7,10 +7,11 @@ from utils.decorators.singleton import Singleton
 @Singleton
 class Database(object):
     "Shared connection to the database"
-
+    
     def __init__(self):
         self.flights = pd.read_csv('./models/database.csv')
-
+        global flights_at_date   #TODO: #CHECK is this the best place to declare it?
+        flights_at_date = []
     def does_place_exist(self, destination):
         "Checks if the city has an airport"
 

@@ -6,7 +6,6 @@ DeparturePlaceIntent from {name}
 DeparturePlaceIntent I will fly from {name}
 PlaceIntent {name}
 
-
 DepartureDateIntent {the_date}
 DepartureDateIntent I want to fly {the_date}
 DepartureDateIntent I want to fly at {the_date}
@@ -20,19 +19,31 @@ DepartureDateIntent Find me flight at {the_date}
 DepartureDateIntent Find me flight on {the_date}
 DepartureDateIntent Find me flight {the_date}
 
-ChooseFlightIntent Yes, book me flight at {departure_time}
-ChooseFlightIntent Yes, book me flight on {departure_time}
-ChooseFlightIntent Yes, flight at {departure_time}
-ChooseFlightIntent Yes, flight on {departure_time}
-ChooseFlightIntent Yes, {departure_time}
+ChooseFlightIntent Yes book me flight at {departure_time}
+ChooseFlightIntent Yes book me flight on {departure_time}
+ChooseFlightIntent Yes flight at {departure_time}
+ChooseFlightIntent Yes flight on {departure_time}
+ChooseFlightIntent Yes {departure_time}
+ChooseFlightIntent Yes at {departure_time}
 ChooseFlightIntent at {departure_time}
-ChooseFlightIntent on {departure_time}
+ChooseFlightIntent after {departure_time}
 
-HowManySeatsToBook {number}
+
+HowManySeatsToBook {number} 
 HowManySeatsToBook Book {number} seats
 HowManySeatsToBook I want to book {number} seats
 HowManySeatsToBook I would like to book {number} seats
 
-YesIntent {boolvalue}
-NoIntent {boolvalue}
+
+FlightsBeforeHourIntent before {the_time}
+FlightsBeforeHourIntent I would like to fly before {the_time}
+
+FlightsAfterHourIntent after {the_time}
+FlightsAfterHourIntent I would like to fly after {the_time}
+
+FlightsBetweenHoursIntent between {time_one} and {time_two}
+FlightsBetweenHoursIntent I would like to fly between {time_one} and {time_two}
+
+AMAZON.YesIntent yes 
+AMAZON.NoIntent no
 
