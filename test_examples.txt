@@ -1,0 +1,30 @@
+# Sample dialogs answers
+
+# Examples working good through Amazon Text Service Symulator
+1/  - (to) Amsterdam
+    - (from) Dublin
+    - january first two thousand seventeen / today / tomorrow
+    - at eleven o five
+    - yes 
+    - no 
+    - yes
+
+2/  - Manchester
+    - Dublin
+    - tomorrow
+    - between 12:00 and sixteen     # twelve / twelve o'clock in word don't work. Why?
+    - at one fifty pm
+    - yes
+    - five
+    - ...
+
+3/  - Amsterdam
+    - Dublin
+    - next monday
+    - after nine o'clock
+    - at 15:30
+    - yes
+    - four
+    - ...
+
+# Examples working good on Echosim 

@@ -12,17 +12,19 @@ from intents import date_intents
 def forward_yes_no(value):
     "Forwards bool value"
 
+
     if constants.INSURANCE in session.attributes:
         return moreinfo_intents.show_flight_summary()
 
     elif constants.SEAT_RESERVATION in session.attributes:
         return moreinfo_intents.response_insurance_reservation(value)
 
-    elif constants.PASSENGERS_NO:
+    elif constants.PASSENGERS_NO in session.attributes:
         return moreinfo_intents.response_seat_reservation(value)
     
     elif constants.DEPARTURE_TIME in session.attributes:
         return question(render_template('askForSeatsAmount'))
+
     
     #TODO: #CHECK if there is no flight, DEPARTURE_DATE is set to None, should ask again for another date
     # Maybe we will solve this with setting ALTERNATIVE_FLIGHTS flag

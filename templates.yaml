@@ -5,9 +5,9 @@ welcome: |
 noSuchDestination: |
     Sorry, we don't flight to {}
 noSuchDeaprturePlace_ChooseAnother: |
-    Sorry, we don't operate in {}. Please choose another departure place'
+    Sorry, we don't operate in {}. Please choose another departure place
 noSuchDestinationPlace_ChooseAnother: |
-    Sorry, we don't operate in {}. Please choose another destination'
+    Sorry, we don't operate in {}. Please choose another destination
 noFlightConnection: |
     Sorry, we don't fly from {} to {}
 askForDeparturePlace: |
@@ -15,11 +15,10 @@ askForDeparturePlace: |
 destinationAndDepartureCollected: |
     Great, when do you want to flight from {} to {} ?
 
+
 #date templates
 didntUnderstandDate: |
-    Sorry, didn't understand the date. Could you repeat it?'
-precizeDepartureTime: |
-    There are {} flights on {}. I will list three flights after chosen hour, after which hour?   
+    Sorry, didn't understand the date. Could you repeat it?
 foundFlight: |
   <speak> 
     There is flight from {} to {} on {}. 
@@ -33,7 +32,6 @@ foundFlightsBeginning: |
   <speak> 
     There are {} flights from {} to {} on {}. 
     <break time="1s"/> 
-
 foundFlightsMiddle: |
     Departure at {}. 
     Arrival at {} 
@@ -48,8 +46,7 @@ noSuchFlightAtDateButAnother: | # in progress
     <break time="1s"/> 
     Would you like me to list them? 
   </speak>
-
-noSuchFlightAtDateNoAnother: | # in progress
+noSuchFlightAtDateNoAnother: | # in progress 
   <speak> 
     Sorry, there is no flight from {} to {} on {}. 
     I also didn't found prefered flight day before and after.
@@ -57,10 +54,22 @@ noSuchFlightAtDateNoAnother: | # in progress
     Would you like to look for flights on another date?
   </speak>
 
+returnTicket: |
+    Do you need return ticket?
+    
+#time templates
+precizeDepartureTime: |
+    There are {} flights on {}. Could you precize the time? 
+askToPrecizeAgain: |
+    Sorry i didn't get it. Could you precize time of departure?
+    Your options are before, after or between hours
 askToRepeatTime: |
     There is no flight at {}. Please repeat departure time.
 flightTimeChosen: |
     Flight on {} at {}. Are you sure?
+didntUnderstandTime: |
+    Sorry i didn't get it.Would you like to book one of these flights?
+
 
 #more_info templates
 askForSeatsAmount: |
@@ -83,3 +92,7 @@ bookingCancelled: |
     You booking is cancelled. Goodbye
 askForLastConfirmation: |
     Sorry, I didn't get it. Do you want to book insurance?
+
+# general
+didntUnderstandThat: |
+    Sorry, I didn't get it. Could you repeat?'

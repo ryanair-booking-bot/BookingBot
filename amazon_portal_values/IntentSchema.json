@@ -39,8 +39,37 @@
      {
       "slots": [
         {
-          "name": "departure_date",
-          "type": "AMAZON.DATE"
+          "name": "the_time",
+          "type": "AMAZON.TIME"
+        }
+      ],
+      "intent": "FlightsBeforeHourIntent"
+    },
+     {
+      "slots": [
+        {
+          "name": "the_time",
+          "type": "AMAZON.TIME"
+        }
+      ],
+      "intent": "FlightsAfterHourIntent"
+    },
+        {
+      "slots": [
+        {
+          "name": "the_time1",
+          "type": "AMAZON.TIME",
+          "name": "the_time1",
+          "type": "AMAZON.TIME"
+        }
+      ],
+      "intent": "FlightsBetweenHoursIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "departure_time",
+          "type": "AMAZON.TIME"
         }
       ],
       "intent": "ChooseFlightIntent"
