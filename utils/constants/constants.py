@@ -24,7 +24,9 @@ INSURANCE_PRICE = 15
 FLIGHT_MIN_PRICE = 40
 FLIGHT_MAX_PRICE = 400
 
-LISTED_FLIGHTS_NUMBER = 3
+# Number of flights Alexa says in one sentence
+# If there are more flights at date, ask to precize time
+LISTED_FLIGHTS_NUMBER = 3   
 
 TESTS = 1 # if true shows variables info in terminal
 

@@ -22,20 +22,13 @@ def forward_yes_no(value):
     
     elif constants.RETURN_TIME in session.attributes:
         return question(render_template('askForSeatsAmount'))
-    
+     
     elif constants.RETURN_TICKET in session.attributes:
         return question(render_template('returnTicket'))
 
     elif constants.DEPARTURE_TIME in session.attributes:
         return date_intents.confirm_return_ticket(value)
 
-    
-    #TODO: #CHECK if there is no flight, DEPARTURE_DATE is set to None, should ask again for another date
-    # Maybe we will solve this with setting ALTERNATIVE_FLIGHTS flag
-    """elif (constants.DEPARTURE_CITY in session.attributes) and (constants.DESTINATION_CITY in session.attributes):
-        return question(render_template('destinationAndDepartureCollected').format(         \
-                                session.attributes[DEPARTURE_CITY],                         \
-                                session.attributes[DESTINATION_CITY]))"""
 
 def handle_yesno_intents(ask):
     "Moreinfo intents handler"
@@ -44,8 +37,7 @@ def handle_yesno_intents(ask):
     def received_yes():
         "Forwards bool value"
         return forward_yes_no(True)
-
-
+        
     @ask.intent("AMAZON.NoIntent")
     def received_no():
         "Forwards bool value"

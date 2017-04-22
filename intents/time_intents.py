@@ -14,7 +14,7 @@ import time as _time
 #TODO: if single flight, confirmation could be yes (now it's only "(...) at {hour}") and skipping confirmation
 #TODO: handle all no's answers and alternative dates
 
-def handle_time_intents(ask):
+def handle_time_intents(ask):   
     "Time intents handler"
     result = "Handling time intent"
     print result
@@ -62,6 +62,7 @@ def handle_time_intents(ask):
                     break
         session.attributes[constants.SHORTEN_FLIGHTS_LIST] = None
         return list_flights(flights_list_shorten)
+
 
 
     """If there is more than constants.LISTED_FLIGHTS_NUMBER to list, user need to specify time"""

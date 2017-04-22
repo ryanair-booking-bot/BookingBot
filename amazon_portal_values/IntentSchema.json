@@ -36,7 +36,7 @@
       ],
       "intent": "DepartureDateIntent"
     },
-     {
+    {
       "slots": [
         {
           "name": "the_time",
@@ -45,7 +45,7 @@
       ],
       "intent": "FlightsBeforeHourIntent"
     },
-     {
+    {
       "slots": [
         {
           "name": "the_time",
@@ -54,12 +54,14 @@
       ],
       "intent": "FlightsAfterHourIntent"
     },
-        {
+    {
       "slots": [
         {
-          "name": "the_time_one",
-          "type": "AMAZON.TIME",
-          "name": "the_time_two",
+          "name": "time_one",
+          "type": "AMAZON.TIME"
+        },
+        {
+          "name": "time_two",
           "type": "AMAZON.TIME"
         }
       ],

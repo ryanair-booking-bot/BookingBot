@@ -9,13 +9,13 @@ from datetime import *
 import time as _time
 
 
-#TODO: Do you need a return ticket?
 #TODO: Listing flights when user would say e.g "this week" instead of the day
 #TODO: AlternativeDateIntent - there is no flight at date, 
 # but we've got four options - there are flights day before and/or after or there are no flights at this days too
 # noSuchFlightAtDate... templates
 #TODO: checking if date is available (don't book historic flights), 
 #TODO: checking if return ticket isn't earlier than first flight
+#TODO: another intents for single {date} or {time}, Alexa don't understand it very well
 
 def handle_date_intents(ask):
 	"Date intents handler"
@@ -113,13 +113,16 @@ def handle_date_intents(ask):
 		
 def confirm_return_ticket(should_book_return_ticket):
 	"'Do you need a return ticket?'"
-	session.attributes[constants.RETURN_TICKET] = should_book_return_ticket
-		
-	if should_book_return_ticket is None:
+	
+	print "should_book_return_ticket: ", should_book_return_ticket
+	if not should_book_return_ticket:
+		session.attributes[constants.RETURN_TICKET] = False
 		return question(render_template('askForSeatsAmount'))
 	else:
+		session.attributes[constants.RETURN_TICKET] = True
 		return question(render_template('askForReturnTicket'))
 
+def choose_return_ticket()
 	
 def list_flights(_flights): 
 	"List flights with departure and arrival time"
@@ -138,7 +141,8 @@ def list_flights(_flights):
 									session.attributes[constants.DESTINATION_CITY], 	\
 									session.attributes[constants.DEPARTURE_DATE],		\
 									departure_time, arrival_time)	
-
+			
+			session.attributes[constants.DEPARTURE_TIME] = departure_time
 		else:
 			"There are multiple flights at date"
 			found_flights = render_template('foundFlightsBeginning').format(					\

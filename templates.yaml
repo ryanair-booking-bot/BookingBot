@@ -69,7 +69,7 @@ askToRepeatTime: |
 flightTimeChosen: |
     Flight on {} at {}. Are you sure?
 didntUnderstandTime: |
-    Sorry i didn't get it.Would you like to book one of these flights?
+    Sorry i didn't get it. Would you like to book one of these flights?
 
 
 #more_info templates
