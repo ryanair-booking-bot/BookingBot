@@ -59,8 +59,8 @@ returnTicket: |
     Great, when would you like to go back?
     
 #time templates
-precizeDepartureTime: |
-    There are {} flights on {}. Could you precize the time?  # TODO: starting from {} to
+precizeDepartureTime: | 
+    There are {} flights on {}. Could you precize the time? 
 askToPrecizeAgain: |
     Sorry i didn't get it. Could you precize time of departure?
     Your options are before, after or between hours

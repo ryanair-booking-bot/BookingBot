@@ -102,7 +102,7 @@ def handle_date_intents(ask):
 			else:
 				session.attributes[constants.SHORTEN_FLIGHTS_LIST] = True
 
-				return question(render_template('precizeDepartureTime').format(			\
+				return question(render_template('precizeDepartureTime').format(				\
 								len(database.flights_at_date),								\
 								session.attributes[constants.DEPARTURE_DATE]))				\
 								.reprompt(render_template('askToPrecizeAgain'))
