@@ -56,7 +56,7 @@ askForInsurance: |
 askToRepeatInsurance: |
     Sorry, I didn't get it. Do you want to book insurance for fifteen euros for each passenger?
 saySummaryAndConfirm: |
-    Please confirm the following booking details. You departure on {}
+    Please confirm the following booking details. You departure on {} 
     from {} to {}. 
 saySummaryAndConfirmIncludes: |
     Your reservation includes
@@ -65,7 +65,7 @@ saySummaryAndConfirmSeatReservation: |
 saySummaryAndConfirmInsurance: |
     insurance
 saySummaryAndConfirmTotalPrice: |
-    The total price is {}
+    The total price is {} euro. 
 saySummaryAndConfirmDoYouConfirm: |
     Do you want to book it?
 bookingDone: |

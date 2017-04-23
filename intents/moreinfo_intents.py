@@ -47,9 +47,17 @@ def ask_for_insurance():
     "Moreinfo intents handler"
     return question(render_template('askForInsurance'))
 
+def show_booking_outcome(value):
+    "x"
+    if value is True:
+        return statement(render_template('bookingDone'))
+    else:
+        return statement(render_template('bookingCancelled'))
+
 def show_flight_summary():
     "Moreinfo intents handler"
 
+    session.attributes[constants.WILL_CONFIRM_BOOKING] = True
     response_date_and_place = render_template('saySummaryAndConfirm').format(   \
                                  session.attributes[constants.DEPARTURE_DATE],  \
                                 session.attributes[constants.DEPARTURE_CITY],   \
@@ -92,7 +100,7 @@ def calculate_price():
         full_price += constants.SEAT_PRICE * passenger_number
 
     if session.attributes[constants.INSURANCE]:
-        full_price += constants.INSURANCE_PRICE * passenger_number
+        full_price += int(constants.INSURANCE_PRICE) * passenger_number
 
     price_of_flight = random.randint(constants.FLIGHT_MIN_PRICE, \
                                      constants.FLIGHT_MAX_PRICE)
