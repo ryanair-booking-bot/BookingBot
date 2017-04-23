@@ -38,7 +38,13 @@ def handle_booking_intents(ask):
                 str(departure_date)
             ))
         else:
+            
+            session.attributes[constants.DEPARTURE_CITY] = departure_city
+            session.attributes[constants.DESTINATION_CITY] = destination_city
+            session.attributes[constants.DEPARTURE_DATE] = str(departure_date)
+
             if len(flights) == 1:
+
                 return question(render_template('foundFlight').format(
                     departure_city,
                     destination_city,
@@ -47,6 +53,7 @@ def handle_booking_intents(ask):
             else:
                 return question(
                     render_template('foundFlightsBeginning').format(
+                        len(flights),
                         departure_city,
                         destination_city,
                         str(departure_date)
