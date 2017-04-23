@@ -6,17 +6,6 @@ from flask_ask import statement, question, session
 from models.database import Database
 from utils.constants import constants
 
-
-
-# database = Database.Instance()
-
-# def connections_between_cities(departure_city_name, destination_city_name):
-#     "Returns list of airport codes if true, otherwise None"
-#     dep_codes = database.get_airport_codes(departure_city_name)
-#     des_codes = database.get_airport_codes(destination_city_name)
-#     return database.does_any_connection_exist(dep_codes, des_codes)
-
-
 def handle_place_intents(ask):
     "Place intents handler"
 
@@ -31,9 +20,9 @@ def handle_place_intents(ask):
             return question(
                 render_template(
                     'destinationAndDepartureCollected').format(
-                    session.attributes[constants.DEPARTURE_CITY],
-                    session.attributes[constants.DESTINATION_CITY])).reprompt(
-                render_template('didntUnderstandDate'))
+                        session.attributes[constants.DEPARTURE_CITY],
+                        session.attributes[constants.DESTINATION_CITY])).reprompt(
+                            render_template('didntUnderstandDate'))
         else:
             return statement(
                 render_template('noFlightConnection').format(
@@ -83,5 +72,5 @@ def handle_place_intents(ask):
             session.attributes[constants.DEPARTURE_CITY] = name
             return start_searching_for_flight()
         else:
-            msg = render_template('noSuchDestination').format(name)
+            msg = render_template('noSuchDeparture').format(name)
             return statement(msg)

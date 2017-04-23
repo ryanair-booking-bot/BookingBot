@@ -46,6 +46,23 @@
       "intent": "HowManySeatsToBook"
     },
     {
+      "slots": [
+        {
+          "name": "departure_city",
+          "type": "AMAZON.EUROPE_CITY"
+        },
+        {
+          "name": "destination_city",
+          "type": "AMAZON.EUROPE_CITY"
+        },
+        {
+          "name": "departure_date",
+          "type": "AMAZON.DATE"
+        }
+      ],
+      "intent": "BookingIntent"
+    },
+    {
       "intent": "AMAZON.YesIntent"
     },
     {
