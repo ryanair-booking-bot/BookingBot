@@ -61,17 +61,17 @@ saySummaryAndConfirm: |
     Please confirm the following booking details. You departure on {} 
     from {} to {}. 
 saySummaryAndConfirmIncludes: |
-    Your reservation includes
+    Your reservation includes {} passenger
 saySummaryAndConfirmSeatReservation: |
-    seat reservation
+    seat reservation 
 saySummaryAndConfirmInsurance: |
-    insurance
+    insurance 
 saySummaryAndConfirmTotalPrice: |
     The total price is {} euro. 
 saySummaryAndConfirmDoYouConfirm: |
     Do you want to book it?
 bookingDone: |
-    Congratulations, you have just booked the flight. Thank you and have a nic flight
+    Congratulations, you have just booked the flight. Thank you and have a nice flight.
 bookingCancelled: |
     You booking is cancelled. Goodbye
 askForLastConfirmation: |
