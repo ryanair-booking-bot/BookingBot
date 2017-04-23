@@ -23,3 +23,18 @@ BookingIntent I would like to fly to {destination_city} from {departure_city} on
 BookingIntent I want to fly to {destination_city} from {departure_city} on {departure_date}
 BookingIntent I would like to fly from {departure_city} to {destination_city} on {departure_date}
 BookingIntent I want to fly from {departure_city} to {destination_city} on {departure_date}
+
+BookingIntent I would like to fly on {departure_date} to {destination_city} from {departure_city} 
+BookingIntent I want to fly {departure_date} to {destination_city} from {departure_city} 
+BookingIntent I would like to fly on {departure_date} from {departure_city} to {destination_city} 
+BookingIntent I want to fly {departure_date} from {departure_city} to {destination_city} 
+
+BookingIntent Book me flight to {destination_city} from {departure_city} on {departure_date}
+BookingIntent Book me flight to {destination_city} from {departure_city} {departure_date}
+BookingIntent Book me flight from {departure_city} to {destination_city} on {departure_date}
+BookingIntent Book me flight from {departure_city} to {destination_city} {departure_date}
+
+BookingIntent Book me flight on {departure_date} to {destination_city} from {departure_city}
+BookingIntent Book me flight {departure_date} to {destination_city} from {departure_city} 
+BookingIntent Book me flight on {departure_date} from {departure_city} to {destination_city} 
+BookingIntent Book me flight {departure_date} from {departure_city} to {destination_city} 
