@@ -1,0 +1,25 @@
+DestinationPlaceIntent to {name}
+DestinationPlaceIntent I want to go to {name}
+DestinationPlaceIntent I want to go to the {name}
+DestinationPlaceIntent I want to fly to {name}
+DestinationPlaceIntent I would like to go to {name}
+DestinationPlaceIntent I would like to go to the {name}
+DestinationPlaceIntent I would like to fly to {name}
+
+DeparturePlaceIntent from {name}
+DeparturePlaceIntent I will fly from {name}
+
+PlaceIntent {name}
+
+DepartureDateIntent {the_date}
+DepartureDateIntent I want to fly {the_date}
+DepartureDateIntent I want to fly at {the_date}
+DepartureDateIntent Find me flight at {the_date}
+DepartureDateIntent Find me flight {the_date}
+
+HowManySeatsToBook {number}
+
+BookingIntent I would like to fly to {destination_city} from {departure_city} on {departure_date}
+BookingIntent I want to fly to {destination_city} from {departure_city} on {departure_date}
+BookingIntent I would like to fly from {departure_city} to {destination_city} on {departure_date}
+BookingIntent I want to fly from {departure_city} to {destination_city} on {departure_date}
