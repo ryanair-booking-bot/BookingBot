@@ -29,7 +29,7 @@ foundFlight: |
 
 foundFlightsBeginning: |
   <speak> 
-    There are multiple flights from {} to {} on {}. 
+    There are {} flights from {} to {} on {}. 
 foundFlightsMiddle: |
     Departure <say-as interpret-as="time">{}</say-as>. 
     Arrival <say-as interpret-as="time">{}</say-as> 
