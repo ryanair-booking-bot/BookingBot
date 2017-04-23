@@ -47,9 +47,41 @@ def ask_for_insurance():
     "Moreinfo intents handler"
     return question(render_template('askForInsurance'))
 
+def show_booking_outcome(value):
+    "x"
+    if value is True:
+        return statement(render_template('bookingDone'))
+    else:
+        return statement(render_template('bookingCancelled'))
+
 def show_flight_summary():
     "Moreinfo intents handler"
-    return question(render_template('saySummaryAndConfirm'))
+
+    session.attributes[constants.WILL_CONFIRM_BOOKING] = True
+    response_date_and_place = render_template('saySummaryAndConfirm').format(   \
+                                 session.attributes[constants.DEPARTURE_DATE],  \
+                                session.attributes[constants.DEPARTURE_CITY],   \
+                                session.attributes[constants.DESTINATION_CITY])
+
+    passenger_number = int(session.attributes[constants.PASSENGERS_NO])
+    response_extras = render_template("saySummaryAndConfirmIncludes").format(passenger_number)
+
+    if passenger_number > 1:
+        response_extras += "s"
+
+    if session.attributes[constants.SEAT_RESERVATION]:
+        response_extras += ", "
+        response_extras += render_template('saySummaryAndConfirmSeatReservation')
+
+    if session.attributes[constants.INSURANCE]:
+        response_extras += ", " + \
+        render_template('saySummaryAndConfirmInsurance')
+
+    response_extras += ". "
+    response_price = render_template("saySummaryAndConfirmTotalPrice").format(calculate_price())
+    response_confirm = render_template("saySummaryAndConfirmDoYouConfirm")
+
+    return question(response_date_and_place+response_extras+response_price+response_confirm)
 
 def response_booking_confirmation(customer_confirms):
     "Moreinfo intents handler"
@@ -64,16 +96,16 @@ def response_booking_confirmation(customer_confirms):
 def calculate_price():
     "Moreinfo intents handler"
     full_price = 0
-    passenger_number = session.attributes[constants.PASSENGERS_NO]
+    passenger_number = int(session.attributes[constants.PASSENGERS_NO])
 
     if session.attributes[constants.SEAT_RESERVATION]:
-        full_price += constants.SEAT_PRICE * passenger_number
+        full_price += int(constants.SEAT_PRICE) * passenger_number
 
     if session.attributes[constants.INSURANCE]:
-        full_price += constants.INSURANCE_PRICE * passenger_number
+        full_price += int(constants.INSURANCE_PRICE) * passenger_number
 
-    price_of_flight = random.randint(constants.FLIGHT_MIN_PRICE, \
-                                     constants.FLIGHT_MAX_PRICE)
+    price_of_flight = passenger_number * random.randint(constants.FLIGHT_MIN_PRICE, \
+                                         constants.FLIGHT_MAX_PRICE)
 
     full_price += price_of_flight
     return full_price

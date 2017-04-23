@@ -10,7 +10,10 @@ from intents import date_intents
 def forward_yes_no(value):
     "Forwards bool value"
 
-    if constants.INSURANCE in session.attributes:
+    if constants.WILL_CONFIRM_BOOKING in session.attributes:
+        return moreinfo_intents.show_booking_outcome(value)
+
+    elif constants.INSURANCE in session.attributes:
         return moreinfo_intents.show_flight_summary()
 
     elif constants.SEAT_RESERVATION in session.attributes:
