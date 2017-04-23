@@ -30,9 +30,10 @@ foundFlight: |
 foundFlightsBeginning: |
   <speak> 
     There are {} flights from {} to {} on {}. 
+    <break time="1s"/> 
 foundFlightsMiddle: |
-    Departure <say-as interpret-as="time">{}</say-as>. 
-    Arrival <say-as interpret-as="time">{}</say-as> 
+    Departure at {}. 
+    Arrival at {} 
     <break time="1s"/> 
 foundFlightsEnd: |
     Would you like to book one of these? </speak> 
