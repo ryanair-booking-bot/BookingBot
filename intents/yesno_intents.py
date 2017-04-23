@@ -5,6 +5,7 @@ from flask import render_template
 from flask_ask import statement, question, session
 from utils.constants import constants
 from intents import moreinfo_intents
+from intents import date_intents
 
 def forward_yes_no(value):
     "Forwards bool value"
@@ -15,11 +16,11 @@ def forward_yes_no(value):
     elif constants.SEAT_RESERVATION in session.attributes:
         return moreinfo_intents.response_insurance_reservation(value)
 
-    elif constants.PASSENGERS_NO:
+    elif constants.PASSENGERS_NO in session.attributes:
         return moreinfo_intents.response_seat_reservation(value)
 
-
-
+    elif constants.DEPARTURE_DATE in session.attributes:
+        return date_intents.go_to_summary()
 
 
 def handle_yesno_intents(ask):

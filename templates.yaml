@@ -20,7 +20,7 @@ didntUnderstandDate: |
     Sorry, didn't understand the date. Could you repeat it?'
 foundFlight: |
   <speak> 
-    There is flight from {} to {} on {} at 
+    Ok, the flight from {} to {} on {} at 
     <say-as interpret-as="time">{}</say-as>. 
     Would you like to book it? 
   </speak>
@@ -49,7 +49,7 @@ askForSeatsAmount: |
 askToRepeatAmount: |
     Sorry, I didn't get it. How many seats do you want to book?
 askForSeat: |
-    Do you want to book choose a seat for ten euros?
+    Do you want to choose a seat for ten euros?
 askToRepeatSeat: |
     Sorry, I didn't get it. Do you want to choose a seat for ten euros for each passenger?
 askForInsurance: |
