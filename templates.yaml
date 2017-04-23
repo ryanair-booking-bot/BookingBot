@@ -28,7 +28,6 @@ foundFlight: |
 foundFlightsBeginning: |
   <speak> 
     There are multiple flights from {} to {} on {}. 
-    <break time="1s"/> Flights 
 foundFlightsMiddle: |
     Departure <say-as interpret-as="time">{}</say-as>. 
     Arrival <say-as interpret-as="time">{}</say-as> 
@@ -57,7 +56,18 @@ askForInsurance: |
 askToRepeatInsurance: |
     Sorry, I didn't get it. Do you want to book insurance for fifteen euros for each passenger?
 saySummaryAndConfirm: |
-    Now I will tell you the summary of your booking.
+    Please confirm the following booking details. You departure on {}
+    from {} to {}. 
+saySummaryAndConfirmIncludes: |
+    Your reservation includes
+saySummaryAndConfirmSeatReservation: |
+    seat reservation
+saySummaryAndConfirmInsurance: |
+    insurance
+saySummaryAndConfirmTotalPrice: |
+    The total price is {}
+saySummaryAndConfirmDoYouConfirm: |
+    Do you want to book it?
 bookingDone: |
     Congratulations, you have just booked the flight. Thank you and have a nic flight
 bookingCancelled: |

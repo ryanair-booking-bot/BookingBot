@@ -49,7 +49,29 @@ def ask_for_insurance():
 
 def show_flight_summary():
     "Moreinfo intents handler"
-    return question(render_template('saySummaryAndConfirm'))
+
+    response_date_and_place = render_template('saySummaryAndConfirm').format(   \
+                                 session.attributes[constants.DEPARTURE_DATE],  \
+                                session.attributes[constants.DEPARTURE_CITY],   \
+                                session.attributes[constants.DESTINATION_CITY])
+
+    response_extras = ""
+    if session.attributes[constants.SEAT_RESERVATION] or   \
+       session.attributes[constants.INSURANCE]:
+        response_extras = render_template("saySummaryAndConfirmIncludes")
+
+        if session.attributes[constants.SEAT_RESERVATION]:
+            response_extras += render_template('saySummaryAndConfirmSeatReservation')
+
+        if session.attributes[constants.INSURANCE]:
+            response_extras += "and" + \
+            render_template('saySummarsaySummaryAndConfirmInsuranceyAndConfirm') + \
+            "."
+
+    response_price = render_template("saySummaryAndConfirmTotalPrice").format(calculate_price())
+    response_confirm = render_template("saySummaryAndConfirmDoYouConfirm")
+
+    return question(response_date_and_place+response_extras+response_price+response_confirm)
 
 def response_booking_confirmation(customer_confirms):
     "Moreinfo intents handler"
