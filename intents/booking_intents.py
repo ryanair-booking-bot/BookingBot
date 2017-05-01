@@ -5,6 +5,7 @@ from flask import render_template
 from flask_ask import statement, question, session
 from models.database import Database
 from utils.constants import constants
+from date_intents import list_flights
 
 database = Database.Instance()
 
@@ -43,19 +44,5 @@ def handle_booking_intents(ask):
             session.attributes[constants.DESTINATION_CITY] = destination_city
             session.attributes[constants.DEPARTURE_DATE] = str(departure_date)
 
-            if len(flights) == 1:
-
-                return question(render_template('foundFlight').format(
-                    departure_city,
-                    destination_city,
-                    str(departure_date)
-                ))
-            else:
-                return question(
-                    render_template('foundFlightsBeginning').format(
-                        len(flights),
-                        departure_city,
-                        destination_city,
-                        str(departure_date)
-                    ) + render_template('foundFlightsEnd')
-                )
+            return list_flights(flights)
+            
