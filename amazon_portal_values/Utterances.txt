@@ -17,6 +17,16 @@ DepartureDateIntent I want to fly at {the_date}
 DepartureDateIntent Find me flight at {the_date}
 DepartureDateIntent Find me flight {the_date}
 
+ChooseFlightIntent Book me flight at {departure_time}
+ChooseFlightIntent Yes book me flight at {departure_time}
+ChooseFlightIntent Yes book me flight on {departure_time}
+ChooseFlightIntent Yes flight at {departure_time}
+ChooseFlightIntent Yes flight on {departure_time}
+ChooseFlightIntent Yes {departure_time}
+ChooseFlightIntent Yes at {departure_time}
+ChooseFlightIntent at {departure_time}
+ChooseFlightIntent {departure_time}
+
 HowManySeatsToBook {number}
 
 BookingIntent I would like to fly to {destination_city} from {departure_city} on {departure_date}

@@ -7,13 +7,11 @@ from models.database import Database
 from utils.constants import constants
 import random
 
-
-
-
-def handle_moreinfo_intents(ask):
+def handle_moreinfo_intents(ask, sup):
     "Moreinfo intents handler"
 
     @ask.intent("HowManySeatsToBook")
+    @sup.guide
     def how_many_seats_to_book(number):
         "Receives number of passangers"
 
@@ -41,7 +39,6 @@ def response_insurance_reservation(should_reserve_insurance):
     else:
         session.attributes[constants.INSURANCE] = should_reserve_insurance
         return show_flight_summary()
-
 
 def ask_for_insurance():
     "Moreinfo intents handler"

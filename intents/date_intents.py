@@ -8,19 +8,18 @@ from datetime import date
 from utils.constants import constants
 import time as _time
 
-#TODO: Do you need a return ticket?
-#TODO: Choosing flight from the list
-#TODO: Listing flights when user would say e.g "this week" instead of the day
+global flights_at_date
+flights_at_date = []
+database = Database.Instance()
 
-
-def handle_date_intents(ask):
+def handle_date_intents(ask, sup):
 	"Date intents handler"
 	result = "Handling date intent"
 	print result
-	database = Database.Instance()
-
+	
 
 	@ask.intent("DepartureDateIntent", convert={'the_date': 'date'})
+	@sup.guide
 	def departure_date(the_date):
 		departure_date = str(the_date)
 
@@ -28,10 +27,11 @@ def handle_date_intents(ask):
 	
 	   	if departure_date_is_set:
 			
-			flights_at_date = (database.get_flights(							 \
-						session.attributes[constants.DEPARTURE_CITY],     		 \
-						session.attributes[constants.DESTINATION_CITY],	 		 \
-						'{d.month}/{d.day}/{d.year}'.format(d=the_date)))		
+			find_flights(session.attributes[constants.DEPARTURE_CITY], 		\
+						session.attributes[constants.DESTINATION_CITY],		\
+																the_date)		
+
+			print "Flights at date: ", flights_at_date
 			
 			if flights_at_date:
 				"There is one or more flights at date"
@@ -49,6 +49,12 @@ def handle_date_intents(ask):
 							session.attributes[constants.DEPARTURE_DATE]))
 		else:
 			pass
+def find_flights(departure_city, destination_city, the_date):
+	global flights_at_date
+	flights_at_date = (database.get_flights(								\
+						departure_city, destination_city, 					\
+						'{d.month}/{d.day}/{d.year}'.format(d=the_date)))
+	return flights_at_date
 
 def list_flights(_flights):
 		"List flights with departure and arrival time"
@@ -68,7 +74,7 @@ def list_flights(_flights):
 		else:
 			"There are multiple flights at date"
 			found_flights = render_template('foundFlightsBeginning').format(
-								len(_flights),															\
+								len(_flights),												\
 								session.attributes[constants.DEPARTURE_CITY], 				\
 								session.attributes[constants.DESTINATION_CITY], 			\
 								session.attributes[constants.DEPARTURE_DATE]) + " "
@@ -87,7 +93,20 @@ def list_flights(_flights):
 
 			return question(found_flights) 
 
-def go_to_summary():
-    "Ask For Seats Amount"
-    return question(render_template('askForSeatsAmount')) 
 
+def init_confirmation(customer_confirms):
+
+	if constants.DEPARTURE_TIME in session.attributes:
+		if customer_confirms:
+			"Ask For Seats Amount"
+			return question(render_template('askForSeatsAmount'))
+		else:
+			"Go through flight booking again"
+			return statement(render_template('chooseFlightAgain')) 
+	else:
+		if customer_confirms:
+			"Ask to choose flight time"
+			return question(render_template('askForFlightTime'))
+		else:
+			"Go through flight booking again"
+			return statement(render_template('chooseFlightAgain'))

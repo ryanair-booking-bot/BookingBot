@@ -1,0 +1,101 @@
+# start and finish steps in scenario
+first_step: init
+last_step: done
+default_help: ""
+
+steps:
+  # minimal description for the first step
+  init:
+    events:
+      new_booking:
+        next: booking_choice 
+     
+  # booking intents (places and date)
+  booking_choice:
+    reprompt: "Sorry, I didn't understand. Could you repeat cities and departure date?"
+    # help phrase for the current step
+    help: "Say: destination, departure cities and departure date in one sentence or starting from departure place"
+    events:
+      book:
+        next: departure_time_choice
+      destination_place:
+        next: departure_city
+      place:
+        next: departure_city
+  
+  departure_city:
+    reprompt: "Sorry, I didn't understand. From where would you like to fly?'"
+    help: "Say: departure city"
+    events:
+      departure_place:
+        next: departure_date_choice
+      place:
+        next: departure_date_choice
+  
+  departure_date_choice:
+    reprompt: "Sorry, I didn't understand. When would you like to fly?"
+    help: "Say: date of flight"
+    events:
+      departure_date:
+        next: departure_time_choice
+  
+  departure_time_choice:
+    reprompt: "Sorry, I didn't understand. What time would you like to fly?"
+    help: "Say: time of flight"
+    events:
+      choose_flight:
+        next: confirm_flight
+
+  confirm_flight:
+    reprompt: Sorry, I didn't understand. Do you confirm this flight?"
+    help: "Say: yes or no"
+    events:
+      received_yes:
+        next: seats_number_choice
+      received_no:
+        next: booking_choice
+
+# more info intents
+  seats_number_choice:
+    reprompt: "Sorry, I didn't understand, how many seats you want to book?"
+    help: "Say: number"
+    events:
+      how_many_seats_to_book:
+        next: seats_reservation
+
+  seats_reservation:
+    reprompt: "Sorry, I didn't understand, do you want to book seats for ten euro?"
+    help: "Say: yes or no"
+    events:
+      received_yes:
+        next: insurance
+      received_no:
+        next: insurance
+  
+  insurance:
+    reprompt: "Sorry, I didn't understand, do you want insurance?"
+    help: "Say: yes or no"
+    events:
+      received_yes:
+        next: confirm_booking
+      received_no:
+        next: confirm_booking
+
+  confirm_booking:
+    reprompt: "Do you confirm this reservation?"
+    help: "Say: yes or no"
+    events:
+      received_yes:
+        next: flight_summary
+      received_no:
+        next: flight_summary # change that
+
+# no need to describe last step
+  flight_summary:
+    reprompt: "Do you confirm this reservation?"
+    events:
+      response_booking_confirmation:
+        next: done
+  
+  done:
+

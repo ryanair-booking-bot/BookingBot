@@ -5,14 +5,15 @@ from flask import render_template
 from flask_ask import statement, question, session
 from models.database import Database
 from utils.constants import constants
-from date_intents import list_flights
+from date_intents import list_flights, find_flights
 
 database = Database.Instance()
 
-def handle_booking_intents(ask):
+def handle_booking_intents(ask, sup):
     "Booking intents handler"
 
     @ask.intent("BookingIntent", convert={'departure_date': 'date'})
+    @sup.guide
     def book(departure_city, destination_city, departure_date):
         "Finds a flight from departure_city to destiantion_city on departure_date"
 
@@ -27,11 +28,8 @@ def handle_booking_intents(ask):
                 render_template('noFlightConnection').format(departure_city, destination_city)
             )
 
-        flights = database.get_flights(
-            departure_city,
-            destination_city,
-            '{d.month}/{d.day}/{d.year}'.format(d=departure_date)
-        )
+        flights = find_flights(departure_city, destination_city, departure_date)
+        
         if flights is None:
             return question(render_template('noSuchFlightAtDate').format(
                 departure_city,

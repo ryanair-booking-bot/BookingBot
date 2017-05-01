@@ -22,20 +22,23 @@ def forward_yes_no(value):
     elif constants.PASSENGERS_NO in session.attributes:
         return moreinfo_intents.response_seat_reservation(value)
 
+    elif constants.DEPARTURE_TIME in session.attributes:
+        return date_intents.init_confirmation(value)
+
     elif constants.DEPARTURE_DATE in session.attributes:
-        return date_intents.go_to_summary()
+        return date_intents.init_confirmation(value)
 
-
-def handle_yesno_intents(ask):
+def handle_yesno_intents(ask, sup):
     "Moreinfo intents handler"
 
     @ask.intent("AMAZON.YesIntent")
+    @sup.guide
     def received_yes():
         "Forwards bool value"
         return forward_yes_no(True)
 
-
     @ask.intent("AMAZON.NoIntent")
+    @sup.guide
     def received_no():
         "Forwards bool value"
         return forward_yes_no(False)

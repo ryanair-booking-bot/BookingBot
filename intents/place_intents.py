@@ -6,7 +6,7 @@ from flask_ask import statement, question, session
 from models.database import Database
 from utils.constants import constants
 
-def handle_place_intents(ask):
+def handle_place_intents(ask, sup):
     "Place intents handler"
 
     database = Database.Instance()
@@ -30,6 +30,7 @@ def handle_place_intents(ask):
                     session.attributes[constants.DESTINATION_CITY]))
 
     @ask.intent("PlaceIntent")
+    @sup.guide
     def place(name):
         "If user says just the name of the city. Eg.'London'. " \
         "Then we need to check what info he already passed"
@@ -51,6 +52,7 @@ def handle_place_intents(ask):
                 return question(render_template('noSuchDestinationPlace_ChooseAnother').format(name))
 
     @ask.intent("DestinationPlaceIntent")
+    @sup.guide
     def destination_place(name):
         "Receives destination place. Eg. 'I want to go to London' or 'to London'." \
         " So we need to ask for the departure city"
@@ -65,6 +67,7 @@ def handle_place_intents(ask):
             return statement(msg)
 
     @ask.intent("DeparturePlaceIntent")
+    @sup.guide
     def departure_place(name):
         "Receives departure place       Eg. 'from London' "
 
