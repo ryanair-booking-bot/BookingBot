@@ -6,7 +6,7 @@ from flask import render_template
 from flask_ask import statement, question, session
 from models.database import Database
 from utils.constants import constants
-import date_intents
+from date_intents import find_flights
 from datetime import *
 import time as _time
 
@@ -27,12 +27,10 @@ def handle_time_intents(ask, sup):
         departure_time_is_set = constants.DEPARTURE_TIME in session.attributes
        
         "Checks if flight at given hour exist, if so ask for confirmation"
-        
-        print "Flights: ", date_intents.flights_at_date
-        for flight in date_intents.flights_at_date:       
+        flights_at_date = find_flights()
+
+        for flight in flights_at_date:       
             flight_departure_time = datetime.strptime(flight[5].split()[1], '%H:%M').time()
-            print "Departure time: ", departure_time
-            print "Flight departure time: ", flight_departure_time
 
             if departure_time == flight_departure_time:
                 if departure_date_is_set:
@@ -40,7 +38,6 @@ def handle_time_intents(ask, sup):
             
         if departure_date_is_set:
             departure_time_is_set = constants.DEPARTURE_TIME in session.attributes
-
 
         if departure_time_is_set:
             "Confirmation of date and time"
