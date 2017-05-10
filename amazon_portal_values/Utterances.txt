@@ -6,7 +6,7 @@ DestinationPlaceIntent I would like to go to {name}
 DestinationPlaceIntent I would like to go to the {name}
 DestinationPlaceIntent I would like to fly to {name}
 
-DeparturePlaceIntent from {name}
+DeparturePlaceIntent from {name}    
 DeparturePlaceIntent I will fly from {name}
 
 PlaceIntent {name}

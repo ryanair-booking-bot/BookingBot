@@ -43,7 +43,7 @@ foundFlightsEnd: |
 noSuchFlightAtDate: | 
   <speak> 
     Sorry, there is no flight from {} to {} on {}. 
-    Look for flights day before and after?
+    Look for the flights day before and after?
   </speak>
 
 #time templates

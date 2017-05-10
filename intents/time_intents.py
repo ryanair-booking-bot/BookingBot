@@ -6,7 +6,7 @@ from flask import render_template
 from flask_ask import statement, question, session
 from models.database import Database
 from utils.constants import constants
-from date_intents import find_flights
+from date_intents import *
 from datetime import *
 import time as _time
 

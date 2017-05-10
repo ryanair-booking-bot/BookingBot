@@ -34,7 +34,7 @@ class Database(object):
             return None             
         return result.values.tolist()
     
-    def get_flight(self, flight_id):
+    def get_single_flight(self, flight_id):
         "Get flight by its id"
         result = self.flights.loc[lambda df: df.Id == long(flight_id), :]
         if result.empty:

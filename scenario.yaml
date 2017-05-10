@@ -13,7 +13,6 @@ steps:
   # booking intents (places and date)
   booking_choice:
     reprompt: "Sorry, I didn't understand. Could you repeat cities and departure date?"
-    # help phrase for the current step
     help: "Say: destination, departure cities and departure date in one sentence or starting from departure place"
     events:
       book:
@@ -39,6 +38,7 @@ steps:
       departure_date:
         next: departure_time_choice
   
+  # time intents
   departure_time_choice:
     reprompt: "Sorry, I didn't understand. What time would you like to fly?"
     help: "Say: time of flight"
@@ -88,9 +88,8 @@ steps:
       received_yes:
         next: flight_summary
       received_no:
-        next: flight_summary # change that
+        next: init
 
-# no need to describe last step
   flight_summary:
     reprompt: "Do you confirm this reservation?"
     events:
