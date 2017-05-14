@@ -6,7 +6,7 @@ DestinationPlaceIntent I would like to go to {name}
 DestinationPlaceIntent I would like to go to the {name}
 DestinationPlaceIntent I would like to fly to {name}
 
-DeparturePlaceIntent from {name}
+DeparturePlaceIntent from {name}    
 DeparturePlaceIntent I will fly from {name}
 
 PlaceIntent {name}
@@ -14,8 +14,20 @@ PlaceIntent {name}
 DepartureDateIntent {the_date}
 DepartureDateIntent I want to fly {the_date}
 DepartureDateIntent I want to fly at {the_date}
+DepartureDateIntent I would like to fly on {the_date}
+DepartureDateIntent I would like to fly {the_date}
 DepartureDateIntent Find me flight at {the_date}
 DepartureDateIntent Find me flight {the_date}
+
+ChooseFlightIntent Book me flight at {departure_time}
+ChooseFlightIntent Yes book me flight at {departure_time}
+ChooseFlightIntent Yes book me flight on {departure_time}
+ChooseFlightIntent Yes flight at {departure_time}
+ChooseFlightIntent Yes flight on {departure_time}
+ChooseFlightIntent Yes {departure_time}
+ChooseFlightIntent Yes at {departure_time}
+ChooseFlightIntent at {departure_time}
+ChooseFlightIntent {departure_time}
 
 HowManySeatsToBook {number}
 

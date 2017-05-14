@@ -33,6 +33,14 @@ class Database(object):
         if result.empty:
             return None             
         return result.values.tolist()
+    
+    def get_single_flight(self, flight_id):
+        "Get flight by its id"
+        result = self.flights.loc[lambda df: df.Id == long(flight_id), :]
+        if result.empty:
+            return None             
+        return result.values.tolist()
+
 
     def do_connections_exist(self, departure_city, arrival_city):
         "Checks if there is any flight between two airports"

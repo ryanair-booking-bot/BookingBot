@@ -5,32 +5,31 @@ from flask import render_template
 from flask_ask import statement, question, session
 from models.database import Database
 from utils.constants import constants
+from date_intents import *
 
 database = Database.Instance()
 
-def handle_booking_intents(ask):
+def handle_booking_intents(ask, sup):
     "Booking intents handler"
 
     @ask.intent("BookingIntent", convert={'departure_date': 'date'})
+    @sup.guide
     def book(departure_city, destination_city, departure_date):
         "Finds a flight from departure_city to destiantion_city on departure_date"
 
         if not database.does_place_exist(departure_city):
-            return statement(render_template('noSuchDeparture').format(departure_city))
+            return sup.reprompt_error('noSuchDeparture').format(departure_city)
 
         if not database.does_place_exist(destination_city):
-            return statement(render_template('noSuchDestination').format(destination_city))
+            return sup.reprompt_error('noSuchDestination').format(destination_city)
 
         if not database.do_connections_exist(departure_city, destination_city):
-            return statement(
+            return sup.reprompt_error(
                 render_template('noFlightConnection').format(departure_city, destination_city)
             )
 
-        flights = database.get_flights(
-            departure_city,
-            destination_city,
-            '{d.month}/{d.day}/{d.year}'.format(d=departure_date)
-        )
+        flights = find_flights(departure_city, destination_city, departure_date)
+        
         if flights is None:
             return question(render_template('noSuchFlightAtDate').format(
                 departure_city,
@@ -43,19 +42,5 @@ def handle_booking_intents(ask):
             session.attributes[constants.DESTINATION_CITY] = destination_city
             session.attributes[constants.DEPARTURE_DATE] = str(departure_date)
 
-            if len(flights) == 1:
-
-                return question(render_template('foundFlight').format(
-                    departure_city,
-                    destination_city,
-                    str(departure_date)
-                ))
-            else:
-                return question(
-                    render_template('foundFlightsBeginning').format(
-                        len(flights),
-                        departure_city,
-                        destination_city,
-                        str(departure_date)
-                    ) + render_template('foundFlightsEnd')
-                )
+            return list_flights(flights)
+            
