@@ -18,13 +18,13 @@ def handle_booking_intents(ask, sup):
         "Finds a flight from departure_city to destiantion_city on departure_date"
 
         if not database.does_place_exist(departure_city):
-            return statement(render_template('noSuchDeparture').format(departure_city))
+            return sup.reprompt_error('noSuchDeparture').format(departure_city)
 
         if not database.does_place_exist(destination_city):
-            return statement(render_template('noSuchDestination').format(destination_city))
+            return sup.reprompt_error('noSuchDestination').format(destination_city)
 
         if not database.do_connections_exist(departure_city, destination_city):
-            return statement(
+            return sup.reprompt_error(
                 render_template('noFlightConnection').format(departure_city, destination_city)
             )
 

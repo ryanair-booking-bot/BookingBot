@@ -20,8 +20,6 @@ destinationAndDepartureCollected: |
     Great, when do you want to flight from {} to {}
 
 #date templates
-didntUnderstandDate: |
-    Sorry, didn't understand the date. Could you repeat it?'
 foundFlight: |
   <speak> 
     Ok, the flight from {} to {} on {} at {}.
@@ -42,8 +40,8 @@ foundFlightsEnd: |
 
 noSuchFlightAtDate: | 
   <speak> 
-    Sorry, there is no flight from {} to {} on {}. 
-    Look for the flights day before and after?
+    Sorry, there is no flight from {} to {} on {}.
+    When would you like to fly? 
   </speak>
 
 #time templates
@@ -53,8 +51,6 @@ askToRepeatTime: |
     There is no flight at {}. Please repeat departure time.
 flightTimeChosen: |
     Flight on {} at {}. Are you sure?
-didntUnderstandTime: |
-    Sorry i didn't get it. Would you like to book one of these flights?
 
 #more_info templates
 askForSeatsAmount: |

@@ -45,6 +45,10 @@ steps:
     events:
       choose_flight:
         next: confirm_flight
+      received_yes:
+        next: departure_time_choice
+      received_no:
+        next: init
 
   confirm_flight:
     reprompt: Sorry, I didn't understand. Do you confirm this flight?"
@@ -53,7 +57,7 @@ steps:
       received_yes:
         next: seats_number_choice
       received_no:
-        next: booking_choice
+        next: init
 
 # more info intents
   seats_number_choice:

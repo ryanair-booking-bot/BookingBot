@@ -8,7 +8,7 @@ from models.database import Database
 from utils.constants import constants
 from date_intents import *
 from datetime import *
-import time as _time
+
 
 def handle_time_intents(ask, sup):   
     "Time intents handler"
@@ -25,19 +25,18 @@ def handle_time_intents(ask, sup):
 
         departure_date_is_set = constants.DEPARTURE_DATE in session.attributes
         departure_time_is_set = constants.DEPARTURE_TIME in session.attributes
-       
-        "Checks if flight at given hour exist, if so ask for confirmation"
-        flights_at_date = find_flights()
-
-        for flight in flights_at_date:       
-            flight_departure_time = datetime.strptime(flight[5].split()[1], '%H:%M').time()
-
-            if departure_time == flight_departure_time:
-                if departure_date_is_set:
-                    session.attributes[constants.DEPARTURE_TIME] = str(departure_time)
-            
+        
         if departure_date_is_set:
-            departure_time_is_set = constants.DEPARTURE_TIME in session.attributes
+            "Checks if flight at given hour exist, if so ask for confirmation"
+            flights_at_date = find_flights()
+
+            for flight in flights_at_date:       
+                flight_departure_time = datetime.strptime(flight[5].split()[1], '%H:%M').time()
+
+                if departure_time == flight_departure_time:
+                        session.attributes[constants.DEPARTURE_TIME] = str(departure_time)
+            
+                departure_time_is_set = constants.DEPARTURE_TIME in session.attributes
 
         if departure_time_is_set:
             "Confirmation of date and time"
@@ -47,5 +46,12 @@ def handle_time_intents(ask, sup):
                                 .reprompt(render_template('flightTimeChosen'))
         else :
             "No flight at given time, ask to choose valid time"
-            return question(render_template('askToRepeatTime').format(str(departure_time))) \
-                .reprompt(render_template('didntUnderstandTime'))
+            return sup.reprompt_error(render_template('askToRepeatTime').format(str(departure_time)))
+
+def flight_confirmation(customer_confirms):               
+    if customer_confirms:
+        "Ask For Seats Amount"
+        return question(render_template('askForSeatsAmount'))
+    else:
+        "Go through flight booking again"
+        return statement(render_template('chooseFlightAgain')) 

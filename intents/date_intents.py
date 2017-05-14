@@ -25,19 +25,15 @@ def handle_date_intents(ask, sup):
 																			the_date)		
 		session.attributes[constants.DEPARTURE_DATE] = departure_date
 		
-		if len(flights_at_date) == 1:
-			"There is only one flight at date"
-			return list_single_flight(flights_at_date)
-
-		elif flights_at_date :
-			"There are multiple flights at date"
+		if flights_at_date :
+			"There is at least one flight at date"
 			return list_flights(flights_at_date)
 
 		else:
 			"There is no flight at date. Suggest flights near the date"
 			session.attributes[constants.DEPARTURE_DATE] = None
 
-			return statement(render_template('noSuchFlightAtDate').format(				\
+			return sup.reprompt_error(render_template('noSuchFlightAtDate').format(		\
 							session.attributes[constants.DEPARTURE_CITY],     		 	\
 							session.attributes[constants.DESTINATION_CITY],				\
 							session.attributes[constants.DEPARTURE_DATE]))
@@ -85,38 +81,34 @@ def list_single_flight(flight):
 	return question(found_flights)
 
 def list_flights(flights):
-	"There are multiple flights at date"
-	found_flights = render_template('foundFlightsBeginning').format(
-						len(flights),												\
-						session.attributes[constants.DEPARTURE_CITY], 				\
-						session.attributes[constants.DESTINATION_CITY], 			\
-						session.attributes[constants.DEPARTURE_DATE]) + " "	
-	
-	for flight in flights:
-		"List hours of flights"
-		departure_time = time.strftime('%I:%M %p', time.strptime(flight[5].split()[1], '%H:%M'))
-		arrival_time = time.strftime('%I:%M %p', time.strptime(flight[6].split()[1], '%H:%M'))
-				 	
-		found_flights += render_template('foundFlightsMiddle').format(		\
-								departure_time, arrival_time) + " "
-						
-	found_flights += render_template('foundFlightsEnd')		
-	return question(found_flights) 
 
-
-def init_confirmation(customer_confirms):
-
-	if constants.DEPARTURE_TIME in session.attributes:
-		if customer_confirms:
-			"Ask For Seats Amount"
-			return question(render_template('askForSeatsAmount'))
-		else:
-			"Go through flight booking again"
-			return statement(render_template('chooseFlightAgain')) 
+	if len(flights) == 1:
+		"There is only one flight at date"
+		return list_single_flight(flights)
 	else:
-		if customer_confirms:
-			"Ask to choose flight time"
-			return question(render_template('askForFlightTime'))
-		else:
-			"Go through flight booking again"
-			return statement(render_template('chooseFlightAgain'))
+		"There are multiple flights at date"
+		found_flights = render_template('foundFlightsBeginning').format(
+							len(flights),												\
+							session.attributes[constants.DEPARTURE_CITY], 				\
+							session.attributes[constants.DESTINATION_CITY], 			\
+							session.attributes[constants.DEPARTURE_DATE]) + " "	
+	
+		for flight in flights:
+			"List hours of flights"
+			departure_time = time.strftime('%I:%M %p', time.strptime(flight[5].split()[1], '%H:%M'))
+			arrival_time = time.strftime('%I:%M %p', time.strptime(flight[6].split()[1], '%H:%M'))
+				 	
+			found_flights += render_template('foundFlightsMiddle').format(		\
+									departure_time, arrival_time) + " "
+						
+		found_flights += render_template('foundFlightsEnd')		
+		return question(found_flights) 
+
+
+def flights_choosing_confirmation(customer_confirms):
+	if customer_confirms:
+		"Ask to choose flight time"
+		return question(render_template('askForFlightTime'))
+	else:
+		"Go through flight booking again"
+		return statement(render_template('chooseFlightAgain'))
