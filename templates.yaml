@@ -66,6 +66,7 @@ askForInsurance: |
 askToRepeatInsurance: |
     Sorry, I didn't get it. Do you want to book insurance for fifteen euros for each passenger?
 saySummaryAndConfirm: |
+  <speak> 
     Please confirm the following booking details. You departure on {} 
     from {} to {}. 
 saySummaryAndConfirmIncludes: |
@@ -75,9 +76,9 @@ saySummaryAndConfirmSeatReservation: |
 saySummaryAndConfirmInsurance: |
     insurance 
 saySummaryAndConfirmTotalPrice: |
-    The total price is {} euro. 
+    The total price is <say-as interpret-as="cardinal"> {} </say-as> euro. 
 saySummaryAndConfirmDoYouConfirm: |
-    Do you want to book it?
+    Do you want to book it? </speak> 
 bookingDone: |
     Congratulations, you have just booked the flight. Thank you and have a nice flight.
 bookingCancelled: |
