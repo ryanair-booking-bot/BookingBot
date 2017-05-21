@@ -41,7 +41,7 @@ def handle_date_intents(ask, sup):
 
 def find_flights(departure_city = None, destination_city = None, the_date = None):
 	
-	flights_at_date =[]
+	flights_at_date = []
 	
 	if departure_city and destination_city and the_date:
 		"Finds flights from departure_city to _arrival_city on specific date" 	\
@@ -105,10 +105,12 @@ def list_flights(flights):
 		return question(found_flights) 
 
 
-def flights_choosing_confirmation(customer_confirms):
+def flights_choosing_confirmation(sup, customer_confirms):
 	if customer_confirms:
 		"Ask to choose flight time"
 		return question(render_template('askForFlightTime'))
 	else:
 		"Go through flight booking again"
-		return statement(render_template('chooseFlightAgain'))
+		sup.move_to_step('booking_choice')
+		session.clear()
+		return question(render_template('chooseFlightAgain'))

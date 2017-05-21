@@ -18,15 +18,24 @@ def handle_booking_intents(ask, sup):
         "Finds a flight from departure_city to destiantion_city on departure_date"
 
         if not database.does_place_exist(departure_city):
-            return sup.reprompt_error(render_template('noSuchDeparture').format(departure_city))
+            return sup.reprompt_error('noSuchDeparture').format(departure_city)
 
         if not database.does_place_exist(destination_city):
-            return sup.reprompt_error(render_template('noSuchDestination').format(destination_city))
+            return sup.reprompt_error('noSuchDestination').format(destination_city)
 
         if not database.do_connections_exist(departure_city, destination_city):
             return sup.reprompt_error(
                 render_template('noFlightConnection').format(departure_city, destination_city)
             )
+        session.attributes[constants.DEPARTURE_CITY] = departure_city
+        session.attributes[constants.DESTINATION_CITY] = destination_city
+
+        if not departure_date:
+            "If no date given, asks for it"
+            sup.move_to_step('departure_date_choice')
+            return question(render_template('destinationAndDepartureCollected').format(
+                  departure_city, destination_city
+              ))
 
         flights = find_flights(departure_city, destination_city, departure_date)
         
@@ -37,9 +46,6 @@ def handle_booking_intents(ask, sup):
                 str(departure_date)
             ))
         else:
-            
-            session.attributes[constants.DEPARTURE_CITY] = departure_city
-            session.attributes[constants.DESTINATION_CITY] = destination_city
             session.attributes[constants.DEPARTURE_DATE] = str(departure_date)
 
             return list_flights(flights)

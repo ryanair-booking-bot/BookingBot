@@ -53,7 +53,6 @@ def show_booking_outcome(value):
 
 def show_flight_summary():
     "Moreinfo intents handler"
-
     session.attributes[constants.WILL_CONFIRM_BOOKING] = True
     response_date_and_place = render_template('saySummaryAndConfirm').format(   \
                                  session.attributes[constants.DEPARTURE_DATE],  \
