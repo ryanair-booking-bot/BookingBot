@@ -1,0 +1,81 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "name",
+          "type": "AMAZON.EUROPE_CITY"
+        }
+      ],
+      "intent": "DestinationPlaceIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "name",
+          "type": "AMAZON.EUROPE_CITY"
+        }
+      ],
+      "intent": "DeparturePlaceIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "name",
+          "type": "AMAZON.EUROPE_CITY"
+        }
+      ],
+      "intent": "PlaceIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "the_date",
+          "type": "AMAZON.DATE"
+        }
+      ],
+      "intent": "DepartureDateIntent"
+    },
+     {
+      "slots": [
+        {
+          "name": "departure_time",
+          "type": "AMAZON.TIME"
+        }
+      ],
+      "intent": "ChooseFlightIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "number",
+          "type": "AMAZON.NUMBER"
+        }
+      ],
+      "intent": "HowManySeatsToBook"
+    },
+    {
+      "slots": [
+        {
+          "name": "departure_city",
+          "type": "AMAZON.EUROPE_CITY"
+        },
+        {
+          "name": "destination_city",
+          "type": "AMAZON.EUROPE_CITY"
+        },
+        {
+          "name": "departure_date",
+          "type": "AMAZON.DATE"
+        }
+      ],
+      "intent": "BookingIntent"
+    },
+    {
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
+    }
+  ]
+}
