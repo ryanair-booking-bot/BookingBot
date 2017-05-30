@@ -22,7 +22,6 @@ def forward_yes_no(sup, value):
                         "Booking confirmation"
                         if constants.WILL_CONFIRM_BOOKING in session.attributes:
                             "Booking outcome"
-                        
                             return moreinfo_intents.show_booking_outcome(value)
                     
                         return moreinfo_intents.show_flight_summary()

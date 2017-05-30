@@ -36,7 +36,7 @@ def handle_date_intents(ask, sup):
 			return sup.reprompt_error(render_template('noSuchFlightAtDate').format(		\
 							session.attributes[constants.DEPARTURE_CITY],     		 	\
 							session.attributes[constants.DESTINATION_CITY],				\
-							session.attributes[constants.DEPARTURE_DATE]))
+							str(the_date)))
 		
 
 def find_flights(departure_city = None, destination_city = None, the_date = None):
@@ -71,7 +71,6 @@ def find_flights(departure_city = None, destination_city = None, the_date = None
 def list_single_flight(flight):
 	"List single flight with departure and arrival time"
 	departure_time = time.strftime('%I:%M %p', time.strptime(flight[0][5].split()[1], '%H:%M'))
-	arrival_time = time.strftime('%I:%M %p', time.strptime(flight[0][6].split()[1], '%H:%M'))
 			
 	found_flights = render_template('foundFlight').format(						\
 							session.attributes[constants.DEPARTURE_CITY],		\
@@ -96,10 +95,9 @@ def list_flights(flights):
 		for flight in flights:
 			"List hours of flights"
 			departure_time = time.strftime('%I:%M %p', time.strptime(flight[5].split()[1], '%H:%M'))
-			arrival_time = time.strftime('%I:%M %p', time.strptime(flight[6].split()[1], '%H:%M'))
 				 	
 			found_flights += render_template('foundFlightsMiddle').format(		\
-									departure_time, arrival_time) + " "
+									departure_time) + " "
 						
 		found_flights += render_template('foundFlightsEnd')		
 		return question(found_flights) 
