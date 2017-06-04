@@ -36,12 +36,12 @@ def handle_date_intents(ask, sup):
 			return sup.reprompt_error(render_template('noSuchFlightAtDate').format(		\
 							session.attributes[constants.DEPARTURE_CITY],     		 	\
 							session.attributes[constants.DESTINATION_CITY],				\
-							session.attributes[constants.DEPARTURE_DATE]))
+							str(the_date)))
 		
 
 def find_flights(departure_city = None, destination_city = None, the_date = None):
 	
-	flights_at_date =[]
+	flights_at_date = []
 	
 	if departure_city and destination_city and the_date:
 		"Finds flights from departure_city to _arrival_city on specific date" 	\
@@ -71,7 +71,6 @@ def find_flights(departure_city = None, destination_city = None, the_date = None
 def list_single_flight(flight):
 	"List single flight with departure and arrival time"
 	departure_time = time.strftime('%I:%M %p', time.strptime(flight[0][5].split()[1], '%H:%M'))
-	arrival_time = time.strftime('%I:%M %p', time.strptime(flight[0][6].split()[1], '%H:%M'))
 			
 	found_flights = render_template('foundFlight').format(						\
 							session.attributes[constants.DEPARTURE_CITY],		\
@@ -96,19 +95,20 @@ def list_flights(flights):
 		for flight in flights:
 			"List hours of flights"
 			departure_time = time.strftime('%I:%M %p', time.strptime(flight[5].split()[1], '%H:%M'))
-			arrival_time = time.strftime('%I:%M %p', time.strptime(flight[6].split()[1], '%H:%M'))
 				 	
 			found_flights += render_template('foundFlightsMiddle').format(		\
-									departure_time, arrival_time) + " "
+									departure_time) + " "
 						
 		found_flights += render_template('foundFlightsEnd')		
 		return question(found_flights) 
 
 
-def flights_choosing_confirmation(customer_confirms):
+def flights_choosing_confirmation(sup, customer_confirms):
 	if customer_confirms:
 		"Ask to choose flight time"
 		return question(render_template('askForFlightTime'))
 	else:
 		"Go through flight booking again"
-		return statement(render_template('chooseFlightAgain'))
+		sup.move_to_step('booking_choice')
+		session.clear()
+		return question(render_template('chooseFlightAgain'))

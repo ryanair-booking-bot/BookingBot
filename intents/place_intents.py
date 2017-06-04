@@ -23,7 +23,10 @@ def handle_place_intents(ask, sup):
                         session.attributes[constants.DEPARTURE_CITY],
                         session.attributes[constants.DESTINATION_CITY]))
         else:
-            return statement(
+            "If there is no flight connection start booking again"
+            sup.move_to_step('booking_choice')
+        
+            return question(
                 render_template('noFlightConnection').format(
                     session.attributes[constants.DEPARTURE_CITY],
                     session.attributes[constants.DESTINATION_CITY]))
@@ -40,7 +43,8 @@ def handle_place_intents(ask, sup):
             if database.does_place_exist(name):
                 session.attributes[constants.DEPARTURE_CITY] = name
                 return start_searching_for_flight()
-            return question(render_template('noSuchDeaprturePlace_ChooseAnother').format(name))
+            return sup.reprompt_error(
+                render_template('noSuchDeaprturePlace_ChooseAnother').format(name))
 
         else:
             # checks destination
@@ -48,7 +52,8 @@ def handle_place_intents(ask, sup):
                 session.attributes[constants.DESTINATION_CITY] = name
                 return question(render_template("askForDeparturePlace"))
             else:
-                return question(render_template('noSuchDestinationPlace_ChooseAnother').format(name))
+                return sup.reprompt_error(
+                    render_template('noSuchDestinationPlace_ChooseAnother').format(name))
 
     @ask.intent("DestinationPlaceIntent")
     @sup.guide
@@ -58,12 +63,11 @@ def handle_place_intents(ask, sup):
 
         if database.does_place_exist(name):
             session.attributes[constants.DESTINATION_CITY] = name
-            msg = render_template("askForDeparturePlace")
-            return question(msg)
+            return question(render_template("askForDeparturePlace"))
 
         else:
-            msg = render_template('noSuchDestination').format(name)
-            return statement(msg)
+            return sup.reprompt_error(
+                render_template('noSuchDestination').format(name))
 
     @ask.intent("DeparturePlaceIntent")
     @sup.guide
@@ -74,5 +78,5 @@ def handle_place_intents(ask, sup):
             session.attributes[constants.DEPARTURE_CITY] = name
             return start_searching_for_flight()
         else:
-            msg = render_template('noSuchDeparture').format(name)
-            return statement(msg)
+            return sup.reprompt_error(
+                render_template('noSuchDeparture').format(name))

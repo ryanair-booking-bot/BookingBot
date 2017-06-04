@@ -48,10 +48,12 @@ def handle_time_intents(ask, sup):
             "No flight at given time, ask to choose valid time"
             return sup.reprompt_error(render_template('askToRepeatTime').format(str(departure_time)))
 
-def flight_confirmation(customer_confirms):               
+def flight_confirmation(sup, customer_confirms):               
     if customer_confirms:
         "Ask For Seats Amount"
         return question(render_template('askForSeatsAmount'))
-    else:
+    else:   
         "Go through flight booking again"
-        return statement(render_template('chooseFlightAgain')) 
+        sup.move_to_step('booking_choice')
+        session.clear()
+        return question(render_template('chooseFlightAgain')) 

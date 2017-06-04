@@ -92,7 +92,7 @@ steps:
       received_yes:
         next: flight_summary
       received_no:
-        next: init
+        next: booking_choice
 
   flight_summary:
     reprompt: "Do you confirm this reservation?"

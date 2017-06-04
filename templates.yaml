@@ -5,15 +5,15 @@ chooseFlightAgain: |
 
 #place templates
 noSuchDeparture: |
-    Sorry, we don't flight from {}
+    Sorry, we don't flight from {}. Please choose another departure place
 noSuchDestination: |
-    Sorry, we don't flight to {}
+    Sorry, we don't flight to {}. Please choose another destination
 noSuchDeaprturePlace_ChooseAnother: |
-    Sorry, we don't operate in {}. Please choose another departure place'
+    Sorry, we don't operate in {}. Please choose another departure place
 noSuchDestinationPlace_ChooseAnother: |
-    Sorry, we don't operate in {}. Please choose another destination'
+    Sorry, we don't operate in {}. Please choose another destination
 noFlightConnection: |
-    Sorry, we don't fly from {} to {}
+    Sorry, we don't fly from {} to {}. Please choose another cities and dates
 askForDeparturePlace: |
     Where will you travel from?
 destinationAndDepartureCollected: |
@@ -33,7 +33,6 @@ foundFlightsBeginning: |
     <break time="1s"/> 
 foundFlightsMiddle: |
     Departure at {}. 
-    Arrival at {} 
     <break time="1s"/> 
 foundFlightsEnd: |
     Would you like to book one of these? </speak> 

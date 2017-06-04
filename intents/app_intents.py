@@ -12,7 +12,6 @@ def handle_app_intents(ask, sup):
     @sup.guide
     def new_booking():
         "On the app launch"
-
         welcome_msg = render_template('welcome')
         return question(welcome_msg)
 
